@@ -50,6 +50,8 @@
             this.cmTempo = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.tsConfiguration = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsConfigurationConnect = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsConfigurationMeet = new System.Windows.Forms.ToolStripMenuItem();
             this.tsSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.tsExit = new System.Windows.Forms.ToolStripMenuItem();
             this.tiZumdido = new System.Windows.Forms.Timer(this.components);
@@ -245,31 +247,48 @@
             this.tsSeparator,
             this.tsExit});
             this.cmTempo.Name = "cmTempo";
-            this.cmTempo.Size = new System.Drawing.Size(151, 76);
+            this.cmTempo.Size = new System.Drawing.Size(181, 98);
             // 
             // tsOpen
             // 
             this.tsOpen.Name = "tsOpen";
-            this.tsOpen.Size = new System.Drawing.Size(150, 22);
+            this.tsOpen.Size = new System.Drawing.Size(180, 22);
             this.tsOpen.Text = "Abrir";
             this.tsOpen.Click += new System.EventHandler(this.tsOpen_Click);
             // 
             // tsConfiguration
             // 
+            this.tsConfiguration.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsConfigurationConnect,
+            this.tsConfigurationMeet});
             this.tsConfiguration.Name = "tsConfiguration";
-            this.tsConfiguration.Size = new System.Drawing.Size(150, 22);
+            this.tsConfiguration.Size = new System.Drawing.Size(180, 22);
             this.tsConfiguration.Text = "Configuración";
             this.tsConfiguration.Click += new System.EventHandler(this.tsConfiguration_Click);
+            // 
+            // tsConfigurationConnect
+            // 
+            this.tsConfigurationConnect.Name = "tsConfigurationConnect";
+            this.tsConfigurationConnect.Size = new System.Drawing.Size(180, 22);
+            this.tsConfigurationConnect.Text = "Conexión";
+            this.tsConfigurationConnect.Click += new System.EventHandler(this.tsConfigurationConnect_Click);
+            // 
+            // tsConfigurationMeet
+            // 
+            this.tsConfigurationMeet.CheckOnClick = true;
+            this.tsConfigurationMeet.Name = "tsConfigurationMeet";
+            this.tsConfigurationMeet.Size = new System.Drawing.Size(180, 22);
+            this.tsConfigurationMeet.Text = "Modo Reunión";
             // 
             // tsSeparator
             // 
             this.tsSeparator.Name = "tsSeparator";
-            this.tsSeparator.Size = new System.Drawing.Size(147, 6);
+            this.tsSeparator.Size = new System.Drawing.Size(177, 6);
             // 
             // tsExit
             // 
             this.tsExit.Name = "tsExit";
-            this.tsExit.Size = new System.Drawing.Size(150, 22);
+            this.tsExit.Size = new System.Drawing.Size(180, 22);
             this.tsExit.Text = "Salir";
             this.tsExit.Click += new System.EventHandler(this.tsExit_Click);
             // 
@@ -278,7 +297,7 @@
             this.tiZumdido.Interval = 20;
             this.tiZumdido.Tick += new System.EventHandler(this.tiZumdido_Tick);
             // 
-            // FormTempo
+            // FrmTempo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -300,7 +319,7 @@
             this.Controls.Add(this.btRegister);
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "FormTempo";
+            this.Name = "FrmTempo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tempo";
             this.TopMost = true;
@@ -337,5 +356,7 @@
         private ToolStripMenuItem tsExit;
         private ToolStripMenuItem tsConfiguration;
         private System.Windows.Forms.Timer tiZumdido;
+        private ToolStripMenuItem tsConfigurationConnect;
+        private ToolStripMenuItem tsConfigurationMeet;
     }
 }

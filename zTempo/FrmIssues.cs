@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using zTempo.Application;
 using zTempo.Models;
 using zTempo.Helpers;
-using Message = zTempo.Helpers.Message;
+using ZMessage = zTempo.Helpers.ZMessage;
 
 namespace zTempo
 {
@@ -60,8 +60,8 @@ namespace zTempo
         private async void btSearch_Click(object sender, EventArgs e)
         {
             Project = (Project)cbProjects.SelectedItem;
-            if (Project == null) { Message.Information("Seleccione primero el proyecto"); return; }
-            if (string.IsNullOrEmpty(tbFilter.Text)) { Message.Information("Debe ingresar un filtro"); return; }
+            if (Project == null) { ZMessage.Information("Seleccione primero el proyecto"); return; }
+            if (string.IsNullOrEmpty(tbFilter.Text)) { ZMessage.Information("Debe ingresar un filtro"); return; }
 
 
             var issues = await issueService.GetIssuesByName(Project.Key, tbFilter.Text);

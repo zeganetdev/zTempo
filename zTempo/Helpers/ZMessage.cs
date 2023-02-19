@@ -7,7 +7,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace zTempo.Helpers
 {
-    internal static class Message
+    internal static class ZMessage
     {
         static string title = "zTempo";
         internal static void Information(string text)

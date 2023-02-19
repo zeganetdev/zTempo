@@ -63,29 +63,9 @@ namespace zTempo.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap timeGreen {
+        internal static System.Drawing.Bitmap tempo_circle {
             get {
-                object obj = ResourceManager.GetObject("timeGreen", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap timeGreen2 {
-            get {
-                object obj = ResourceManager.GetObject("timeGreen2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap timeGreen3 {
-            get {
-                object obj = ResourceManager.GetObject("timeGreen3", resourceCulture);
+                object obj = ResourceManager.GetObject("tempo_circle", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

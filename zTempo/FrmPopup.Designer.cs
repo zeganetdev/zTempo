@@ -28,44 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pbTimeIcon = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pbTimeIcon)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pbTimeIcon
-            // 
-            this.pbTimeIcon.Image = global::zTempo.Properties.Resources.timeGreen3;
-            this.pbTimeIcon.Location = new System.Drawing.Point(23, 24);
-            this.pbTimeIcon.Name = "pbTimeIcon";
-            this.pbTimeIcon.Size = new System.Drawing.Size(76, 67);
-            this.pbTimeIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbTimeIcon.TabIndex = 0;
-            this.pbTimeIcon.TabStop = false;
-            this.pbTimeIcon.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbTimeIcon_MouseDown);
-            this.pbTimeIcon.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbTimeIcon_MouseMove);
             // 
             // FrmPopup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(125, 115);
-            this.ControlBox = false;
-            this.Controls.Add(this.pbTimeIcon);
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.ClientSize = new System.Drawing.Size(415, 280);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmPopup";
-            this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.Text = "FrmPopup";
             this.TopMost = true;
-            this.TransparencyKey = System.Drawing.Color.Black;
-            ((System.ComponentModel.ISupportInitialize)(this.pbTimeIcon)).EndInit();
+            this.Load += new System.EventHandler(this.FrmPopup_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.FrmPopup_Paint);
+            this.DoubleClick += new System.EventHandler(this.FrmPopup_DoubleClick);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FrmPopup_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.FrmPopup_MouseMove);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private PictureBox pbTimeIcon;
     }
 }

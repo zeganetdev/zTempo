@@ -9,7 +9,7 @@ using zTempo.Models;
 using zTempo.Persistence.Repositories;
 using zTempo.Persistence.SeedWork;
 using App = System.Windows.Forms.Application;
-using Message = zTempo.Helpers.Message;
+using ZMessage = zTempo.Helpers.ZMessage;
 
 
 namespace zTempo
@@ -22,22 +22,25 @@ namespace zTempo
         [STAThread]
         static void Main()
         {
-            IHost host = Host.CreateDefaultBuilder().ConfigureServices(ConfigureServices).Build();
-            App.EnableVisualStyles();
-            App.SetCompatibleTextRenderingDefault(false);
-            App.SetHighDpiMode(HighDpiMode.SystemAware);
+            bool createdNew;
+            using (Mutex mutex = new Mutex(true, "z.zTempo", out createdNew))
+            {
+                if (createdNew)
+                {
+                    IHost host = Host.CreateDefaultBuilder().ConfigureServices(ConfigureServices).Build();
+                    App.EnableVisualStyles();
+                    App.SetCompatibleTextRenderingDefault(false);
+                    App.SetHighDpiMode(HighDpiMode.SystemAware);
 
+                    App.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
+                    AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
 
-            App.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
-            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+                    //FrmPopup mainView = host.Services.GetRequiredService<FrmPopup>();
+                    FrmTempo mainView = host.Services.GetRequiredService<FrmTempo>();
 
-
-            //FrmPopup mainView = host.Services.GetRequiredService<FrmPopup>();
-            FrmTempo mainView = host.Services.GetRequiredService<FrmTempo>();
-            App.Run(mainView);
-            
-            //ApplicationConfiguration.Initialize();
-            //Application.Run(new FormTempo());
+                    App.Run(mainView);
+                }
+            }
         }
 
         private static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
@@ -65,12 +68,12 @@ namespace zTempo
 
         private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
-            Message.Error($"Se ha producido un error: {e.Exception.Message}");
+            ZMessage.Error($"Se ha producido un error: {e.Exception.Message}");
         }
 
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            Message.Error($"Se ha producido un error: {(e.ExceptionObject as Exception)?.Message}");
+            ZMessage.Error($"Se ha producido un error: {(e.ExceptionObject as Exception)?.Message}");
         }
     }
 }

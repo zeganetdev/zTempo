@@ -2,7 +2,7 @@ using System.Diagnostics.Metrics;
 using zTempo.Application;
 using zTempo.Helpers;
 using zTempo.Models;
-using Message = zTempo.Helpers.Message;
+using ZMessage = zTempo.Helpers.ZMessage;
 
 namespace zTempo
 {
@@ -11,6 +11,7 @@ namespace zTempo
         private readonly FrmProjects frmProjects;
         private readonly FrmIssues frmIssues;
         private readonly FrmConfiguration frmConfiguration;
+        private readonly FrmPopup frmPopup;
         private readonly IProjectService projectService;
         private readonly IIssueService issueService;
         private readonly IWorklogService worklogService;
@@ -18,12 +19,19 @@ namespace zTempo
 
         private int buzz = 20;
 
-        public FrmTempo(FrmProjects frmProjects, FrmIssues frmIssues, FrmConfiguration frmConfiguration, IProjectService projectService, IIssueService issueService, IWorklogService worklogService)
+        public FrmTempo(FrmProjects frmProjects, 
+                        FrmIssues frmIssues, 
+                        FrmConfiguration frmConfiguration, 
+                        FrmPopup frmPopup,
+                        IProjectService projectService, 
+                        IIssueService issueService, 
+                        IWorklogService worklogService)
         {
             InitializeComponent();
             this.frmProjects = frmProjects;
             this.frmIssues = frmIssues;
             this.frmConfiguration = frmConfiguration;
+            this.frmPopup = frmPopup;
             this.projectService = projectService;
             this.issueService = issueService;
             this.worklogService = worklogService;
@@ -59,6 +67,7 @@ namespace zTempo
         {
             InitializeValueDefault();
             niTempo.Visible = true;
+            frmPopup.FrmTempo = this;
         }
 
         private void btTaskManager_Click(object sender, EventArgs e)
@@ -93,12 +102,12 @@ namespace zTempo
             var time = tbTime.Text;
             var duration = TimeOnly.Parse(tbDuration.Text);
             var project = (Project)cbProjects.SelectedItem;
-            if (project == null) { Message.Information("Seleccione una projecto"); return; };
+            if (project == null) { ZMessage.Information("Seleccione una projecto"); return; };
 
             var issue = (Issue)lbIssues.SelectedItem;
-            if (issue == null) { Message.Information("Seleccione una tarea"); return; }
+            if (issue == null) { ZMessage.Information("Seleccione una tarea"); return; }
 
-            if (chBillable.CheckState == CheckState.Indeterminate) { Message.Information("Debe elegir si la tarea es facturable"); return; }
+            if (chBillable.CheckState == CheckState.Indeterminate) { ZMessage.Information("Debe elegir si la tarea es facturable"); return; }
 
             var billable = chBillable.Checked ? "Billable" : "NonBillable";
             var timeSpentSeconds = (duration.Hour * 3600) + (duration.Minute * 60);
@@ -115,7 +124,7 @@ namespace zTempo
                 AuthorAccountId = "6126724bd7cac600696d6281"
             });
 
-            Message.Information("Registrado con exito");
+            ZMessage.Information("Registrado con exito");
 
             tbDetail.Text = string.Empty;
             chBillable.CheckState = CheckState.Indeterminate;
@@ -123,14 +132,14 @@ namespace zTempo
 
         private void tiTempo_Tick(object sender, EventArgs e)
         {
-            var dateTime = DateTime.Now;  
+            var dateTime = DateTime.Now;
             if (!(dateTime.DayOfWeek == DayOfWeek.Saturday || dateTime.DayOfWeek == DayOfWeek.Sunday))
             {
                 if (dateTime.Hour >= 9 && dateTime.Hour <= 18)
                 {
                     if (dateTime.Minute == 0)
                     {
-                        Show();
+                        if (tsConfigurationMeet.Checked) frmPopup.Show(); else Show();
                         InitializeValueDefault();
                     }
                 }
@@ -160,10 +169,7 @@ namespace zTempo
 
         private void tsConfiguration_Click(object sender, EventArgs e)
         {
-            if (!frmConfiguration.Created) {
-                frmConfiguration.InitializeData();
-                frmConfiguration.ShowDialog();
-            }
+
         }
 
         private void tiZumdido_Tick(object sender, EventArgs e)
@@ -182,5 +188,13 @@ namespace zTempo
             buzz -= 1;
         }
 
+        private void tsConfigurationConnect_Click(object sender, EventArgs e)
+        {
+            if (!frmConfiguration.Created)
+            {
+                frmConfiguration.InitializeData();
+                frmConfiguration.ShowDialog();
+            }
+        }
     }
 }
