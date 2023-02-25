@@ -12,15 +12,15 @@ namespace zTempo.Helpers
     {
         public PerPixelAlphaForm()
         {
-            //FormBorderStyle = FormBorderStyle.None;
-            //ShowInTaskbar = false;
-            //StartPosition = FormStartPosition.CenterScreen;
-            //Load += PerPixelAlphaForm_Load;
+            FormBorderStyle = FormBorderStyle.None;
+            ShowInTaskbar = false;
+            StartPosition = FormStartPosition.CenterScreen;
+            Load += PerPixelAlphaForm_Load;
         }
 
         void PerPixelAlphaForm_Load(object sender, EventArgs e)
         {
-            //TopMost = true;
+            TopMost = true;
         }
         protected override CreateParams CreateParams
         {
