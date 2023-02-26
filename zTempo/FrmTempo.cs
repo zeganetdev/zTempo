@@ -4,9 +4,11 @@ using System.Collections.ObjectModel;
 using System.Diagnostics.Metrics;
 using System.Globalization;
 using System.Linq;
+using System.Windows.Forms;
 using zTempo.Application;
 using zTempo.Helpers;
 using zTempo.Models;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrayNotify;
 using ZMessage = zTempo.Helpers.ZMessage;
 
 namespace zTempo
@@ -75,6 +77,17 @@ namespace zTempo
             //tbDetail.Text = string.Empty;
         }
 
+        private void InitializeBuzz()
+        {
+            tiZumdido.Tag = Location;
+            tiZumdido.Enabled = !tiZumdido.Enabled;
+            if (tiZumdido.Enabled)
+            {
+                buzz = 24;
+                tiZumdido.Interval = 30;
+            }
+        }
+
         private void btProjectManager_Click(object sender, EventArgs e)
         {
 
@@ -112,6 +125,7 @@ namespace zTempo
                     {
                         if (tsConfigurationMeet.Checked) frmPopup.Show(); else Show();
                         InitializeValueDefault();
+                        InitializeBuzz();
                     }
                 }
             }
@@ -155,7 +169,12 @@ namespace zTempo
                 Left += buzz;
                 Top -= buzz;
             }
-            if (buzz == 0) tiZumdido.Enabled = false;
+            if (buzz == 0)
+            {
+                tiZumdido.Enabled = false;
+                Location = (Point)tiZumdido.Tag;
+            }
+
             buzz -= 1;
         }
 
@@ -170,9 +189,8 @@ namespace zTempo
 
         private async void btRegister_Click(object sender, EventArgs e)
         {
-            //tiZumdido.Enabled = !tiZumdido.Enabled;
-            //if (tiZumdido.Enabled) zumdido = 20;
 
+      
             var date = DateTime.ParseExact(dpDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
             var time = tbTime.Text;
             var duration = TimeOnly.Parse(tbDuration.Text);
@@ -187,23 +205,31 @@ namespace zTempo
             var billable = chBillable.Checked ? "Billable" : "NonBillable";
             var timeSpentSeconds = (duration.Hour * 3600) + (duration.Minute * 60);
 
-            await worklogService.SaveAsync(new Worklog
+            using (var zLoading = new ZLoading(this))
             {
-                Attributes = new List<WorklogAttribute> { new WorklogAttribute { Key = "_Billable_", Value = billable } },
-                //BillableSeconds = chBillable.Checked ? timeSpentSeconds : 0,
-                Description = tbDetail.Text,
-                StartDate = date,
-                StartTime = $"{time}:00",
-                TimeSpentSeconds = timeSpentSeconds,
-                IssueId = int.Parse(issue.Id),
-                AuthorAccountId = "6126724bd7cac600696d6281"
-            });
-            TopMost = false;
+                //for (int i = 0; i < 20; i++)
+                //{
+                //    System.Windows.Forms.Application.DoEvents();
+                //    Thread.Sleep(50);
+                //}
+                await worklogService.SaveAsync(new Worklog
+                {
+                    Attributes = new List<WorklogAttribute> { new WorklogAttribute { Key = "_Billable_", Value = billable } },
+                    //BillableSeconds = chBillable.Checked ? timeSpentSeconds : 0,
+                    Description = tbDetail.Text,
+                    StartDate = date,
+                    StartTime = $"{time}:00",
+                    TimeSpentSeconds = timeSpentSeconds,
+                    IssueId = int.Parse(issue.Id),
+                    AuthorAccountId = "6126724bd7cac600696d6281"
+                });
+            }
             ZMessage.InformationModal(this, "Registrado con exito");
-            TopMost = true;
+
             tbDetail.Text = string.Empty;
             chBillable.CheckState = CheckState.Checked;
             lbIssues.SelectedItem = null;
+
         }
 
         private void gestionarProyectosToolStripMenuItem_Click_1(object sender, EventArgs e)

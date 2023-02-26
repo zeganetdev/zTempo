@@ -61,18 +61,20 @@ namespace zTempo
             if (Project == null) { ZMessage.Information(this, "Seleccione primero el proyecto"); return; }
             if (string.IsNullOrEmpty(tbFilter.Text)) { ZMessage.Information(this, "Debe ingresar un filtro"); return; }
 
-
-            var issues = await issueService.GetIssuesByName(Project.Key, tbFilter.Text);
-            lbIssuesResult.Items.Clear();
-            lbIssuesResult.SelectedItem = null;
-            foreach (var item in issues)
+            using (var zLoading = new ZLoading(this))
             {
-                lbIssuesResult.Items.Add(new MaterialSkin.MaterialListBoxItem
+                var issues = await issueService.GetIssuesByName(Project.Key, tbFilter.Text);
+                lbIssuesResult.Items.Clear();
+                lbIssuesResult.SelectedItem = null;
+                foreach (var item in issues)
                 {
-                    Text = item.Fields.Summary,
-                    SecondaryText = item.Key,
-                    Tag = item
-                });
+                    lbIssuesResult.Items.Add(new MaterialSkin.MaterialListBoxItem
+                    {
+                        Text = item.Fields.Summary,
+                        SecondaryText = item.Key,
+                        Tag = item
+                    });
+                }
             }
         }
 

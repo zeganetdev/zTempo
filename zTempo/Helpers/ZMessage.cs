@@ -25,8 +25,11 @@ namespace zTempo.Helpers
 
         internal static void InformationModal(Form form, string text)
         {
+            form.TopMost = false;
             MaterialDialog materialDialog = new MaterialDialog(form, title, text, "OK", false, "", true);
             DialogResult result = materialDialog.ShowDialog(form);
+            form.TopMost = true;
+
         }
 
         internal static void Error(string text)

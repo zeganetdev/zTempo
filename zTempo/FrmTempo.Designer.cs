@@ -45,8 +45,6 @@ namespace zTempo
             this.cmOptions = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.gestionarProyectosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionarTareasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.materialDrawer1 = new MaterialSkin.Controls.MaterialDrawer();
-            this.materialDrawer2 = new MaterialSkin.Controls.MaterialDrawer();
             this.pbMenu = new System.Windows.Forms.PictureBox();
             this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -138,7 +136,7 @@ namespace zTempo
             // 
             // tiZumdido
             // 
-            this.tiZumdido.Interval = 20;
+            this.tiZumdido.Interval = 10;
             this.tiZumdido.Tick += new System.EventHandler(this.tiZumdido_Tick);
             // 
             // cmOptions
@@ -169,46 +167,6 @@ namespace zTempo
             this.gestionarTareasToolStripMenuItem.Size = new System.Drawing.Size(156, 32);
             this.gestionarTareasToolStripMenuItem.Text = "Tareas";
             this.gestionarTareasToolStripMenuItem.Click += new System.EventHandler(this.gestionarTareasToolStripMenuItem_Click_1);
-            // 
-            // materialDrawer1
-            // 
-            this.materialDrawer1.AutoHide = false;
-            this.materialDrawer1.AutoShow = false;
-            this.materialDrawer1.BackgroundWithAccent = false;
-            this.materialDrawer1.BaseTabControl = null;
-            this.materialDrawer1.Depth = 0;
-            this.materialDrawer1.HighlightWithAccent = true;
-            this.materialDrawer1.IndicatorWidth = 0;
-            this.materialDrawer1.IsOpen = false;
-            this.materialDrawer1.Location = new System.Drawing.Point(-250, 91);
-            this.materialDrawer1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.materialDrawer1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialDrawer1.Name = "materialDrawer1";
-            this.materialDrawer1.ShowIconsWhenHidden = false;
-            this.materialDrawer1.Size = new System.Drawing.Size(250, 120);
-            this.materialDrawer1.TabIndex = 29;
-            this.materialDrawer1.Text = "materialDrawer1";
-            this.materialDrawer1.UseColors = false;
-            // 
-            // materialDrawer2
-            // 
-            this.materialDrawer2.AutoHide = false;
-            this.materialDrawer2.AutoShow = false;
-            this.materialDrawer2.BackgroundWithAccent = false;
-            this.materialDrawer2.BaseTabControl = null;
-            this.materialDrawer2.Depth = 0;
-            this.materialDrawer2.HighlightWithAccent = true;
-            this.materialDrawer2.IndicatorWidth = 0;
-            this.materialDrawer2.IsOpen = false;
-            this.materialDrawer2.Location = new System.Drawing.Point(-250, 195);
-            this.materialDrawer2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.materialDrawer2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialDrawer2.Name = "materialDrawer2";
-            this.materialDrawer2.ShowIconsWhenHidden = false;
-            this.materialDrawer2.Size = new System.Drawing.Size(250, 120);
-            this.materialDrawer2.TabIndex = 33;
-            this.materialDrawer2.Text = "materialDrawer2";
-            this.materialDrawer2.UseColors = false;
             // 
             // pbMenu
             // 
@@ -255,7 +213,7 @@ namespace zTempo
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabPage1.Size = new System.Drawing.Size(592, 613);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.Text = "Registrar en Tempo";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // btRegister
@@ -537,12 +495,6 @@ namespace zTempo
             this.ClientSize = new System.Drawing.Size(604, 707);
             this.Controls.Add(this.materialTabControl1);
             this.Controls.Add(this.pbMenu);
-            this.Controls.Add(this.materialDrawer2);
-            this.Controls.Add(this.materialDrawer1);
-            this.DrawerAutoShow = true;
-            this.DrawerBackgroundWithAccent = true;
-            this.DrawerIsOpen = true;
-            this.DrawerShowIconsWhenHidden = true;
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -577,8 +529,6 @@ namespace zTempo
         private System.Windows.Forms.Timer tiZumdido;
         private ToolStripMenuItem tsConfigurationConnect;
         private ToolStripMenuItem tsConfigurationMeet;
-        private MaterialSkin.Controls.MaterialDrawer materialDrawer1;
-        private MaterialSkin.Controls.MaterialDrawer materialDrawer2;
         private MaterialContextMenuStrip cmOptions;
         private ToolStripMenuItem gestionarProyectosToolStripMenuItem;
         private ToolStripMenuItem gestionarTareasToolStripMenuItem;

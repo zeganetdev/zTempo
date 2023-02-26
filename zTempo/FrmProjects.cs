@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using zTempo.Application;
+using zTempo.Helpers;
 using zTempo.Models;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
 
@@ -81,15 +82,18 @@ namespace zTempo
 
         private async void tbFillter_TrailingIconClick(object sender, EventArgs e)
         {
-            var projects = await projectService.GetProjectsByName(tbFillter.Text);
-            lbProjectsResult.Items.Clear();
-            foreach (var item in projects)
+            using (var zLoading = new ZLoading(this))
             {
-                lbProjectsResult.Items.Add(new MaterialListBoxItem { 
-                    Text = item.Name,
-                    SecondaryText = item.Key,
-                    Tag = item
-                });
+                var projects = await projectService.GetProjectsByName(tbFillter.Text);
+                lbProjectsResult.Items.Clear();
+                foreach (var item in projects)
+                {
+                    lbProjectsResult.Items.Add(new MaterialListBoxItem { 
+                        Text = item.Name,
+                        SecondaryText = item.Key,
+                        Tag = item
+                    });
+                }
             }
         }
 
