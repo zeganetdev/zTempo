@@ -14,10 +14,12 @@ using System.Web;
 using System.Windows.Forms;
 using zTempo.Application;
 using zTempo.CrossCutting.Utilities;
+using MaterialSkin.Controls;
+using MaterialSkin;
 
 namespace zTempo
 {
-    public partial class FrmConfiguration : Form
+    public partial class FrmConfiguration : MaterialForm
     {
         const string urlLocal = "http://localhost:3693";
 
@@ -26,7 +28,16 @@ namespace zTempo
         public FrmConfiguration(IConfigurationService configurationService)
         {
             InitializeComponent();
+            ApplyTheme();
             this.configurationService = configurationService;
+        }
+
+        private void ApplyTheme()
+        {
+            var materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
         }
 
         public void InitializeData()
@@ -127,5 +138,6 @@ namespace zTempo
         {
             Process.Start("explorer", $"{lnkConfigurationJira.Text}");
         }
+
     }
 }

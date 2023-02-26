@@ -28,148 +28,211 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lbProjects = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btDelete = new System.Windows.Forms.Button();
-            this.tbFillter = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btAdd = new System.Windows.Forms.Button();
-            this.lbProjectsResult = new System.Windows.Forms.ListBox();
-            this.btSearch = new System.Windows.Forms.Button();
-            this.btOk = new System.Windows.Forms.Button();
+            this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
+            this.btOk = new MaterialSkin.Controls.MaterialButton();
+            this.btDelete = new MaterialSkin.Controls.MaterialButton();
+            this.btAdd = new MaterialSkin.Controls.MaterialButton();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.lbProjects = new MaterialSkin.Controls.MaterialListBox();
+            this.lbProjectsResult = new MaterialSkin.Controls.MaterialListBox();
+            this.tbFillter = new MaterialSkin.Controls.MaterialTextBox2();
+            this.materialCard1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // materialCard1
+            // 
+            this.materialCard1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard1.Controls.Add(this.btOk);
+            this.materialCard1.Controls.Add(this.btDelete);
+            this.materialCard1.Controls.Add(this.btAdd);
+            this.materialCard1.Controls.Add(this.materialLabel1);
+            this.materialCard1.Controls.Add(this.lbProjects);
+            this.materialCard1.Controls.Add(this.lbProjectsResult);
+            this.materialCard1.Controls.Add(this.tbFillter);
+            this.materialCard1.Depth = 0;
+            this.materialCard1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialCard1.Location = new System.Drawing.Point(17, 78);
+            this.materialCard1.Margin = new System.Windows.Forms.Padding(14);
+            this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCard1.Name = "materialCard1";
+            this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
+            this.materialCard1.Size = new System.Drawing.Size(575, 596);
+            this.materialCard1.TabIndex = 14;
+            // 
+            // btOk
+            // 
+            this.btOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btOk.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btOk.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btOk.Depth = 0;
+            this.btOk.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btOk.HighEmphasis = true;
+            this.btOk.Icon = null;
+            this.btOk.Location = new System.Drawing.Point(493, 540);
+            this.btOk.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btOk.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btOk.Name = "btOk";
+            this.btOk.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btOk.Size = new System.Drawing.Size(64, 36);
+            this.btOk.TabIndex = 20;
+            this.btOk.Text = "Listo";
+            this.btOk.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btOk.UseAccentColor = false;
+            this.btOk.UseVisualStyleBackColor = true;
+            // 
+            // btDelete
+            // 
+            this.btDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btDelete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btDelete.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btDelete.Depth = 0;
+            this.btDelete.HighEmphasis = false;
+            this.btDelete.Icon = null;
+            this.btDelete.Location = new System.Drawing.Point(467, 271);
+            this.btDelete.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btDelete.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btDelete.Name = "btDelete";
+            this.btDelete.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btDelete.Size = new System.Drawing.Size(88, 36);
+            this.btDelete.TabIndex = 19;
+            this.btDelete.Text = "Eliminar";
+            this.btDelete.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            this.btDelete.UseAccentColor = true;
+            this.btDelete.UseVisualStyleBackColor = true;
+            this.btDelete.Click += new System.EventHandler(this.btDelete_Click);
+            // 
+            // btAdd
+            // 
+            this.btAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btAdd.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btAdd.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btAdd.Depth = 0;
+            this.btAdd.HighEmphasis = true;
+            this.btAdd.Icon = null;
+            this.btAdd.Location = new System.Drawing.Point(371, 271);
+            this.btAdd.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btAdd.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btAdd.Name = "btAdd";
+            this.btAdd.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btAdd.Size = new System.Drawing.Size(88, 36);
+            this.btAdd.TabIndex = 18;
+            this.btAdd.Text = "Agregar";
+            this.btAdd.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            this.btAdd.UseAccentColor = true;
+            this.btAdd.UseVisualStyleBackColor = true;
+            this.btAdd.Click += new System.EventHandler(this.btAdd_Click);
+            // 
+            // materialLabel1
+            // 
+            this.materialLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel1.Location = new System.Drawing.Point(21, 281);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(209, 19);
+            this.materialLabel1.TabIndex = 17;
+            this.materialLabel1.Text = "Lista de proyectos en marcha";
             // 
             // lbProjects
             // 
             this.lbProjects.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbProjects.FormattingEnabled = true;
-            this.lbProjects.HorizontalScrollbar = true;
-            this.lbProjects.ItemHeight = 15;
-            this.lbProjects.Location = new System.Drawing.Point(12, 281);
+            this.lbProjects.BackColor = System.Drawing.Color.White;
+            this.lbProjects.BorderColor = System.Drawing.Color.LightGray;
+            this.lbProjects.Depth = 0;
+            this.lbProjects.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lbProjects.Location = new System.Drawing.Point(21, 316);
+            this.lbProjects.MouseState = MaterialSkin.MouseState.HOVER;
             this.lbProjects.Name = "lbProjects";
-            this.lbProjects.Size = new System.Drawing.Size(588, 154);
-            this.lbProjects.TabIndex = 5;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 256);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(161, 15);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Lista de proyectos en marcha";
-            // 
-            // btDelete
-            // 
-            this.btDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btDelete.Location = new System.Drawing.Point(525, 252);
-            this.btDelete.Name = "btDelete";
-            this.btDelete.Size = new System.Drawing.Size(75, 23);
-            this.btDelete.TabIndex = 4;
-            this.btDelete.Text = "Eliminar";
-            this.btDelete.UseVisualStyleBackColor = true;
-            this.btDelete.Click += new System.EventHandler(this.btDelete_Click);
-            // 
-            // tbFillter
-            // 
-            this.tbFillter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbFillter.Location = new System.Drawing.Point(105, 6);
-            this.tbFillter.Name = "tbFillter";
-            this.tbFillter.Size = new System.Drawing.Size(423, 23);
-            this.tbFillter.TabIndex = 0;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(87, 15);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Filtrar proyecto";
-            // 
-            // btAdd
-            // 
-            this.btAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btAdd.Location = new System.Drawing.Point(444, 252);
-            this.btAdd.Name = "btAdd";
-            this.btAdd.Size = new System.Drawing.Size(75, 23);
-            this.btAdd.TabIndex = 3;
-            this.btAdd.Text = "Agregar";
-            this.btAdd.UseVisualStyleBackColor = true;
-            this.btAdd.Click += new System.EventHandler(this.btAdd_Click);
+            this.lbProjects.SelectedIndex = -1;
+            this.lbProjects.SelectedItem = null;
+            this.lbProjects.Size = new System.Drawing.Size(534, 213);
+            this.lbProjects.Style = MaterialSkin.Controls.MaterialListBox.ListBoxStyle.TwoLine;
+            this.lbProjects.TabIndex = 16;
             // 
             // lbProjectsResult
             // 
             this.lbProjectsResult.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbProjectsResult.FormattingEnabled = true;
-            this.lbProjectsResult.HorizontalScrollbar = true;
-            this.lbProjectsResult.ItemHeight = 15;
-            this.lbProjectsResult.Location = new System.Drawing.Point(12, 41);
+            this.lbProjectsResult.BackColor = System.Drawing.Color.White;
+            this.lbProjectsResult.BorderColor = System.Drawing.Color.LightGray;
+            this.lbProjectsResult.Depth = 0;
+            this.lbProjectsResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lbProjectsResult.Location = new System.Drawing.Point(21, 76);
+            this.lbProjectsResult.MouseState = MaterialSkin.MouseState.HOVER;
             this.lbProjectsResult.Name = "lbProjectsResult";
-            this.lbProjectsResult.Size = new System.Drawing.Size(588, 199);
-            this.lbProjectsResult.TabIndex = 2;
+            this.lbProjectsResult.SelectedIndex = -1;
+            this.lbProjectsResult.SelectedItem = null;
+            this.lbProjectsResult.Size = new System.Drawing.Size(534, 186);
+            this.lbProjectsResult.Style = MaterialSkin.Controls.MaterialListBox.ListBoxStyle.TwoLine;
+            this.lbProjectsResult.TabIndex = 15;
             // 
-            // btSearch
+            // tbFillter
             // 
-            this.btSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btSearch.Location = new System.Drawing.Point(534, 6);
-            this.btSearch.Name = "btSearch";
-            this.btSearch.Size = new System.Drawing.Size(66, 23);
-            this.btSearch.TabIndex = 1;
-            this.btSearch.Text = "Buscar";
-            this.btSearch.UseVisualStyleBackColor = true;
-            this.btSearch.Click += new System.EventHandler(this.btSearch_Click);
-            // 
-            // btOk
-            // 
-            this.btOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btOk.Location = new System.Drawing.Point(525, 441);
-            this.btOk.Name = "btOk";
-            this.btOk.Size = new System.Drawing.Size(75, 23);
-            this.btOk.TabIndex = 6;
-            this.btOk.Text = "Listo";
-            this.btOk.UseVisualStyleBackColor = true;
+            this.tbFillter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbFillter.AnimateReadOnly = false;
+            this.tbFillter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tbFillter.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.tbFillter.Depth = 0;
+            this.tbFillter.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.tbFillter.HideSelection = true;
+            this.tbFillter.Hint = "Filtrar proyectos";
+            this.tbFillter.LeadingIcon = null;
+            this.tbFillter.Location = new System.Drawing.Point(21, 22);
+            this.tbFillter.MaxLength = 32767;
+            this.tbFillter.MouseState = MaterialSkin.MouseState.OUT;
+            this.tbFillter.Name = "tbFillter";
+            this.tbFillter.PasswordChar = '\0';
+            this.tbFillter.PrefixSuffixText = null;
+            this.tbFillter.ReadOnly = false;
+            this.tbFillter.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tbFillter.SelectedText = "";
+            this.tbFillter.SelectionLength = 0;
+            this.tbFillter.SelectionStart = 0;
+            this.tbFillter.ShortcutsEnabled = true;
+            this.tbFillter.Size = new System.Drawing.Size(534, 48);
+            this.tbFillter.TabIndex = 14;
+            this.tbFillter.TabStop = false;
+            this.tbFillter.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.tbFillter.TrailingIcon = global::zTempo.Properties.Resources.seach_icon;
+            this.tbFillter.UseSystemPasswordChar = false;
+            this.tbFillter.TrailingIconClick += new System.EventHandler(this.tbFillter_TrailingIconClick);
+            this.tbFillter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbFillter_KeyPress);
             // 
             // FrmProjects
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(613, 476);
-            this.Controls.Add(this.btOk);
-            this.Controls.Add(this.btSearch);
-            this.Controls.Add(this.lbProjectsResult);
-            this.Controls.Add(this.btAdd);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.tbFillter);
-            this.Controls.Add(this.btDelete);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.lbProjects);
+            this.ClientSize = new System.Drawing.Size(609, 691);
+            this.Controls.Add(this.materialCard1);
             this.Name = "FrmProjects";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Proyectos";
             this.TopMost = true;
+            this.Activated += new System.EventHandler(this.FrmProjects_Activated);
+            this.materialCard1.ResumeLayout(false);
+            this.materialCard1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private ListBox lbProjects;
-        private Label label1;
-        private Button btDelete;
-        private TextBox tbFillter;
-        private Label label2;
-        private Button btAdd;
-        private ListBox lbProjectsResult;
-        private Button btSearch;
-        private Button btOk;
+        private MaterialSkin.Controls.MaterialCard materialCard1;
+        private MaterialSkin.Controls.MaterialButton btOk;
+        private MaterialSkin.Controls.MaterialButton btDelete;
+        private MaterialSkin.Controls.MaterialButton btAdd;
+        private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        private MaterialSkin.Controls.MaterialListBox lbProjects;
+        private MaterialSkin.Controls.MaterialListBox lbProjectsResult;
+        private MaterialSkin.Controls.MaterialTextBox2 tbFillter;
     }
 }

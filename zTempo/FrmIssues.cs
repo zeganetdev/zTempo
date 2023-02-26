@@ -11,10 +11,12 @@ using zTempo.Application;
 using zTempo.Models;
 using zTempo.Helpers;
 using ZMessage = zTempo.Helpers.ZMessage;
+using MaterialSkin.Controls;
+using MaterialSkin;
 
 namespace zTempo
 {
-    public partial class FrmIssues : Form
+    public partial class FrmIssues : MaterialForm
     {
         internal List<Issue> Issues { get; set; } = new List<Issue>();
         internal Project Project  { get; set; }
@@ -25,10 +27,20 @@ namespace zTempo
         public FrmIssues(FrmProjects frmProjects, IIssueService issueService, IProjectService projectService)
         {
             InitializeComponent();
+            ApplyTheme();
             this.frmProjects = frmProjects;
             this.issueService = issueService;
             this.projectService = projectService;
         }
+
+        private void ApplyTheme()
+        {
+            var materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+        }
+
         public void InitializeData(Project project)
         {
             cbProjects.Items.Clear();
@@ -42,45 +54,35 @@ namespace zTempo
             }
         }
 
-        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btProjectManager_Click(object sender, EventArgs e)
-        {
-            if (frmProjects.ShowDialog(this) == DialogResult.OK)
-            {
-                cbProjects.Items.Clear();
-                cbProjects.Items.AddRange(frmProjects.Projects.ToArray());
-                projectService.Save(frmProjects.Projects);
-            }
-        }
-
         private async void btSearch_Click(object sender, EventArgs e)
         {
             Project = (Project)cbProjects.SelectedItem;
-            if (Project == null) { ZMessage.Information("Seleccione primero el proyecto"); return; }
-            if (string.IsNullOrEmpty(tbFilter.Text)) { ZMessage.Information("Debe ingresar un filtro"); return; }
+            if (Project == null) { ZMessage.Information(this, "Seleccione primero el proyecto"); return; }
+            if (string.IsNullOrEmpty(tbFilter.Text)) { ZMessage.Information(this, "Debe ingresar un filtro"); return; }
 
 
             var issues = await issueService.GetIssuesByName(Project.Key, tbFilter.Text);
             lbIssuesResult.Items.Clear();
             foreach (var item in issues)
             {
-                lbIssuesResult.Items.Add(item);
+                lbIssuesResult.Items.Add(new MaterialSkin.MaterialListBoxItem
+                {
+                    Text = item.Fields.Summary,
+                    SecondaryText = item.Key,
+                    Tag = item
+                });
             }
         }
 
         private void btAdd_Click(object sender, EventArgs e)
         {
-            var selected = (Issue)lbIssuesResult.SelectedItem;
+            var selected = lbIssuesResult.SelectedItem;
             if (lbIssuesResult.SelectedItem != null)
             {
-                if (Issues.Where(x => x.Id.Equals(selected.Id)).FirstOrDefault() == null)
+                if (Issues.Where(x => x.Id.Equals(((Issue)selected.Tag).Id)).FirstOrDefault() == null)
                 {
-                    selected.ProjectId = Project.Id;
-                    Issues.Add(selected);
+                    ((Issue) selected.Tag).Id = Project.Id;
+                    Issues.Add((Issue)selected.Tag);
                     lbIssues.Items.Add(selected);
                 }
             }
@@ -90,9 +92,9 @@ namespace zTempo
         {
             if (lbIssues.SelectedItem != null)
             {
-                var issue = (Issue)lbIssues.SelectedItem;
+                var issue = lbIssues.SelectedItem;
                 lbIssues.Items.Remove(issue);
-                Issues.Remove(issue);
+                Issues.Remove((Issue)issue.Tag);
             }
         }
 
@@ -104,14 +106,37 @@ namespace zTempo
             Issues.Clear();
             if (Project == null) return;
             var issues = issueService.GetIssues(Project.Id);
-            lbIssues.Items.AddRange(issues.ToArray());
+            issues.ForEach(x => lbIssues.Items.Add(new MaterialSkin.MaterialListBoxItem
+            {
+                Text = x.Fields.Summary,
+                SecondaryText = x.Key,
+                Tag = x
+            }));
+            //lbIssues.Items.AddRange(issues.ToArray());
             Issues.AddRange(issues.ToArray());
+        }
+
+        private void tbFilter_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                btSearch_Click(sender, new EventArgs());
+            }
+        }
+
+        private void pbProjects_Click(object sender, EventArgs e)
+        {
+            if (frmProjects.ShowDialog(this) == DialogResult.OK)
+            {
+                cbProjects.Items.Clear();
+                cbProjects.Items.AddRange(frmProjects.Projects.ToArray());
+                projectService.Save(frmProjects.Projects);
+            }
         }
 
         private void FrmIssues_Activated(object sender, EventArgs e)
         {
-            
-
+            TopMost = true;
         }
     }
 }

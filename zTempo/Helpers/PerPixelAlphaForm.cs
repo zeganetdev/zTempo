@@ -94,14 +94,16 @@ namespace zTempo.Helpers
                 hOldBitmap = SelectObject(memDc, hBitmap);
 
                 // Set parameters for layered window update.
-                Size newSize = new Size(bitmap.Width, bitmap.Height);
-                Point sourceLocation = new Point(0, 0);
-                Point newLocation = new Point(Left, Top);
-                BLENDFUNCTION blend = new BLENDFUNCTION();
-                blend.BlendOp = AC_SRC_OVER;
-                blend.BlendFlags = 0;
-                blend.SourceConstantAlpha = (byte)opacity;
-                blend.AlphaFormat = AC_SRC_ALPHA;
+                Size newSize = new(bitmap.Width, bitmap.Height);
+                Point sourceLocation = new(0, 0);
+                Point newLocation = new(Left, Top);
+                BLENDFUNCTION blend = new()
+                {
+                    BlendOp = AC_SRC_OVER,
+                    BlendFlags = 0,
+                    SourceConstantAlpha = (byte)opacity,
+                    AlphaFormat = AC_SRC_ALPHA
+                };
 
                 // Update the window.
                 UpdateLayeredWindow(
@@ -119,7 +121,7 @@ namespace zTempo.Helpers
             finally
             {
                 // Release device context.
-                ReleaseDC(IntPtr.Zero, screenDc);
+                _ = ReleaseDC(IntPtr.Zero, screenDc);
                 if (hBitmap != IntPtr.Zero)
                 {
                     SelectObject(memDc, hOldBitmap);
@@ -131,8 +133,8 @@ namespace zTempo.Helpers
         #region Native Methods and Structures
 
         const Int32 WS_EX_LAYERED = 0x80000;
-        const Int32 HTCAPTION = 0x02;
-        const Int32 WM_NCHITTEST = 0x84;
+        //const Int32 HTCAPTION = 0x02;
+        //const Int32 WM_NCHITTEST = 0x84;
         const Int32 ULW_ALPHA = 0x02;
         const byte AC_SRC_OVER = 0x00;
         const byte AC_SRC_ALPHA = 0x01;
@@ -148,7 +150,7 @@ namespace zTempo.Helpers
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        struct Size
+        private new struct Size
         {
             public Int32 cx;
             public Int32 cy;

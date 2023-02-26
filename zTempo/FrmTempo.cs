@@ -1,4 +1,9 @@
+using MaterialSkin;
+using MaterialSkin.Controls;
+using System.Collections.ObjectModel;
 using System.Diagnostics.Metrics;
+using System.Globalization;
+using System.Linq;
 using zTempo.Application;
 using zTempo.Helpers;
 using zTempo.Models;
@@ -6,7 +11,7 @@ using ZMessage = zTempo.Helpers.ZMessage;
 
 namespace zTempo
 {
-    public partial class FrmTempo : Form
+    public partial class FrmTempo : MaterialForm
     {
         private readonly FrmProjects frmProjects;
         private readonly FrmIssues frmIssues;
@@ -28,6 +33,7 @@ namespace zTempo
                         IWorklogService worklogService)
         {
             InitializeComponent();
+            ApplyTheme();
             this.frmProjects = frmProjects;
             this.frmIssues = frmIssues;
             this.frmConfiguration = frmConfiguration;
@@ -36,6 +42,21 @@ namespace zTempo
             this.issueService = issueService;
             this.worklogService = worklogService;
             InitializeData();
+        }
+
+        private void ApplyTheme()
+        {
+            var materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.EnforceBackcolorOnAllComponents = true;
+            materialSkinManager.AddFormToManage(this);
+
+            materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+            //materialSkinManager.ColorScheme = new ColorScheme(Primary.Green200,
+            //                                                  Primary.Green900,
+            //                                                  Primary.Green500,
+            //                                                  Accent.Blue100,
+            //                                                  TextShade.WHITE);
         }
 
         private void InitializeData()
@@ -47,20 +68,15 @@ namespace zTempo
         private void InitializeValueDefault()
         {
             tbTime.Text = DateTime.Now.ToString("HH:mm");
-            dpDate.Value = DateTime.Now;
+            dpDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
             tbDuration.Text = "01:00";
-            chBillable.CheckState = CheckState.Indeterminate;
+            chBillable.CheckState = CheckState.Checked;
             //tbDetail.Text = string.Empty;
         }
 
         private void btProjectManager_Click(object sender, EventArgs e)
         {
-            if (frmProjects.ShowDialog(this)== DialogResult.OK)
-            {
-                cbProjects.Items.Clear();
-                cbProjects.Items.AddRange(frmProjects.Projects.ToArray());
-                projectService.Save(frmProjects.Projects);
-            }
+
         }
 
         private void FormTempo_Load(object sender, EventArgs e)
@@ -70,65 +86,18 @@ namespace zTempo
             frmPopup.FrmTempo = this;
         }
 
-        private void btTaskManager_Click(object sender, EventArgs e)
-        {
-            frmIssues.InitializeData((Project)cbProjects.SelectedItem);
-            if (frmIssues.ShowDialog(this) == DialogResult.OK)
-            {
-                lbIssues.Items.Clear();
-                lbIssues.Items.AddRange(frmIssues.Issues.ToArray());
-                issueService.Save(frmIssues.Issues);
-                var index = cbProjects.FindStringExact(frmIssues.Project.ToString());
-                if (index == -1) InitializeData();
-                cbProjects.SelectedIndex = cbProjects.FindStringExact(frmIssues.Project.ToString());
-            }
-        }
 
         private void cbProjects_SelectedIndexChanged(object sender, EventArgs e)
         {
             var project = cbProjects.SelectedItem as Project;
             lbIssues.Items.Clear();
-            if (project != null) lbIssues.Items.AddRange(issueService.GetIssues(project.Id).ToArray());
+            if (project != null)
+                issueService.GetIssues(project.Id).ForEach(x => lbIssues.Items.Add(new MaterialListBoxItem { Text = x.Fields.Summary, SecondaryText = x.Key, Tag = x })); 
+            //lbIssues.Items.AddRange(issueService.GetIssues(project.Id).ToArray());
 
         }
 
-        private async void btRegister_Click(object sender, EventArgs e)
-        {
-            //tiZumdido.Enabled = !tiZumdido.Enabled;
-            //if (tiZumdido.Enabled) zumdido = 20;
 
-
-            var date = dpDate.Value.ToString("yyyy-MM-dd");
-            var time = tbTime.Text;
-            var duration = TimeOnly.Parse(tbDuration.Text);
-            var project = (Project)cbProjects.SelectedItem;
-            if (project == null) { ZMessage.Information("Seleccione una projecto"); return; };
-
-            var issue = (Issue)lbIssues.SelectedItem;
-            if (issue == null) { ZMessage.Information("Seleccione una tarea"); return; }
-
-            if (chBillable.CheckState == CheckState.Indeterminate) { ZMessage.Information("Debe elegir si la tarea es facturable"); return; }
-
-            var billable = chBillable.Checked ? "Billable" : "NonBillable";
-            var timeSpentSeconds = (duration.Hour * 3600) + (duration.Minute * 60);
-
-            await worklogService.SaveAsync(new Worklog
-            {
-                Attributes = new List<WorklogAttribute> { new WorklogAttribute { Key = "_Billable_", Value = billable } },
-                //BillableSeconds = chBillable.Checked ? timeSpentSeconds : 0,
-                Description = tbDetail.Text,
-                StartDate = date,
-                StartTime = $"{time}:00",
-                TimeSpentSeconds = timeSpentSeconds,
-                IssueId = int.Parse(issue.Id),
-                AuthorAccountId = "6126724bd7cac600696d6281"
-            });
-
-            ZMessage.Information("Registrado con exito");
-
-            tbDetail.Text = string.Empty;
-            chBillable.CheckState = CheckState.Indeterminate;
-        }
 
         private void tiTempo_Tick(object sender, EventArgs e)
         {
@@ -195,6 +164,80 @@ namespace zTempo
                 frmConfiguration.InitializeData();
                 frmConfiguration.ShowDialog();
             }
+        }
+
+        private void btRegister_Click(object sender, EventArgs e)
+        {
+            //tiZumdido.Enabled = !tiZumdido.Enabled;
+            //if (tiZumdido.Enabled) zumdido = 20;
+
+            var date = DateTime.ParseExact(dpDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
+            var time = tbTime.Text;
+            var duration = TimeOnly.Parse(tbDuration.Text);
+            var project = (Project)cbProjects.SelectedItem;
+            if (project == null) { ZMessage.Information(this, "Seleccione una projecto"); return; };
+
+            var issue = (Issue)lbIssues.SelectedItem?.Tag;
+            if (issue == null) { ZMessage.Information(this, "Seleccione una tarea"); return; }
+
+            //if (chBillable.CheckState == CheckState.Indeterminate) { ZMessage.Information(this, "Debe elegir si la tarea es facturable"); return; }
+
+            var billable = chBillable.Checked ? "Billable" : "NonBillable";
+            var timeSpentSeconds = (duration.Hour * 3600) + (duration.Minute * 60);
+
+            //await worklogService.SaveAsync(new Worklog
+            //{
+            //    Attributes = new List<WorklogAttribute> { new WorklogAttribute { Key = "_Billable_", Value = billable } },
+            //    //BillableSeconds = chBillable.Checked ? timeSpentSeconds : 0,
+            //    Description = tbDetail.Text,
+            //    StartDate = date,
+            //    StartTime = $"{time}:00",
+            //    TimeSpentSeconds = timeSpentSeconds,
+            //    IssueId = int.Parse(issue.Id),
+            //    AuthorAccountId = "6126724bd7cac600696d6281"
+            //});
+            TopMost = false;
+            ZMessage.InformationModal(this, "Registrado con exito");
+            TopMost = true;
+            tbDetail.Text = string.Empty;
+            chBillable.CheckState = CheckState.Checked;
+            lbIssues.SelectedItem = null;
+        }
+
+        private void gestionarProyectosToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            if (frmProjects.ShowDialog(this) == DialogResult.OK)
+            {
+                cbProjects.Items.Clear();
+                cbProjects.Items.AddRange(frmProjects.Projects.ToArray());
+                projectService.Save(frmProjects.Projects);
+            }
+        }
+
+        private void gestionarTareasToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            frmIssues.InitializeData((Project)cbProjects.SelectedItem);
+            if (frmIssues.ShowDialog(this) == DialogResult.OK)
+            {
+                lbIssues.Items.Clear();
+                frmIssues.Issues.ForEach(x => lbIssues.Items.Add(new MaterialListBoxItem { Text = x.Fields.Summary, SecondaryText = x.Key, Tag = x }));
+                //lbIssues.Items.Add(frmIssues.Issues.ToArray());
+                issueService.Save(frmIssues.Issues);
+                var index = cbProjects.FindStringExact(frmIssues.Project?.ToString());
+                if (index == -1) InitializeData();
+                cbProjects.SelectedIndex = cbProjects.FindStringExact(frmIssues.Project?.ToString());
+            }
+        }
+
+        private void pbMenu_Click(object sender, EventArgs e)
+        {
+            cmOptions.Show(pbMenu, new Point(pbMenu.Width, pbMenu.Height), ToolStripDropDownDirection.Left);
+
+        }
+
+        private void FrmTempo_Activated(object sender, EventArgs e)
+        {
+            TopMost = true;
         }
     }
 }

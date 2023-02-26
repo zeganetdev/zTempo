@@ -28,189 +28,257 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lbIssuesResult = new System.Windows.Forms.ListBox();
-            this.btProjectManager = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cbProjects = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.tbFilter = new System.Windows.Forms.TextBox();
-            this.btAdd = new System.Windows.Forms.Button();
-            this.btDelete = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.lbIssues = new System.Windows.Forms.ListBox();
-            this.btSearch = new System.Windows.Forms.Button();
-            this.btOk = new System.Windows.Forms.Button();
+            this.cbProjects = new MaterialSkin.Controls.MaterialComboBox();
+            this.pbProjects = new System.Windows.Forms.PictureBox();
+            this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
+            this.btOk = new MaterialSkin.Controls.MaterialButton();
+            this.btDelete = new MaterialSkin.Controls.MaterialButton();
+            this.btAdd = new MaterialSkin.Controls.MaterialButton();
+            this.lbIssues = new MaterialSkin.Controls.MaterialListBox();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.lbIssuesResult = new MaterialSkin.Controls.MaterialListBox();
+            this.tbFilter = new MaterialSkin.Controls.MaterialTextBox2();
+            ((System.ComponentModel.ISupportInitialize)(this.pbProjects)).BeginInit();
+            this.materialCard1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // cbProjects
+            // 
+            this.cbProjects.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbProjects.AutoResize = false;
+            this.cbProjects.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cbProjects.Depth = 0;
+            this.cbProjects.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cbProjects.DropDownHeight = 174;
+            this.cbProjects.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbProjects.DropDownWidth = 121;
+            this.cbProjects.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cbProjects.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cbProjects.FormattingEnabled = true;
+            this.cbProjects.Hint = "Lista de proyectos";
+            this.cbProjects.IntegralHeight = false;
+            this.cbProjects.ItemHeight = 43;
+            this.cbProjects.Location = new System.Drawing.Point(17, 75);
+            this.cbProjects.MaxDropDownItems = 4;
+            this.cbProjects.MouseState = MaterialSkin.MouseState.OUT;
+            this.cbProjects.Name = "cbProjects";
+            this.cbProjects.Size = new System.Drawing.Size(640, 49);
+            this.cbProjects.StartIndex = 0;
+            this.cbProjects.TabIndex = 15;
+            this.cbProjects.SelectedIndexChanged += new System.EventHandler(this.cbProjects_SelectedIndexChanged);
+            // 
+            // pbProjects
+            // 
+            this.pbProjects.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbProjects.BackColor = System.Drawing.Color.Transparent;
+            this.pbProjects.Image = global::zTempo.Properties.Resources.menu2;
+            this.pbProjects.Location = new System.Drawing.Point(615, 86);
+            this.pbProjects.Name = "pbProjects";
+            this.pbProjects.Size = new System.Drawing.Size(32, 28);
+            this.pbProjects.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbProjects.TabIndex = 23;
+            this.pbProjects.TabStop = false;
+            this.pbProjects.Click += new System.EventHandler(this.pbProjects_Click);
+            // 
+            // materialCard1
+            // 
+            this.materialCard1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard1.Controls.Add(this.btOk);
+            this.materialCard1.Controls.Add(this.btDelete);
+            this.materialCard1.Controls.Add(this.btAdd);
+            this.materialCard1.Controls.Add(this.lbIssues);
+            this.materialCard1.Controls.Add(this.materialLabel1);
+            this.materialCard1.Controls.Add(this.lbIssuesResult);
+            this.materialCard1.Controls.Add(this.tbFilter);
+            this.materialCard1.Depth = 0;
+            this.materialCard1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialCard1.Location = new System.Drawing.Point(17, 141);
+            this.materialCard1.Margin = new System.Windows.Forms.Padding(14);
+            this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCard1.Name = "materialCard1";
+            this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
+            this.materialCard1.Size = new System.Drawing.Size(640, 570);
+            this.materialCard1.TabIndex = 24;
+            // 
+            // btOk
+            // 
+            this.btOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btOk.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btOk.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btOk.Depth = 0;
+            this.btOk.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btOk.HighEmphasis = true;
+            this.btOk.Icon = null;
+            this.btOk.Location = new System.Drawing.Point(558, 517);
+            this.btOk.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btOk.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btOk.Name = "btOk";
+            this.btOk.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btOk.Size = new System.Drawing.Size(64, 36);
+            this.btOk.TabIndex = 29;
+            this.btOk.Text = "Listo";
+            this.btOk.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btOk.UseAccentColor = false;
+            this.btOk.UseVisualStyleBackColor = true;
+            // 
+            // btDelete
+            // 
+            this.btDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btDelete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btDelete.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btDelete.Depth = 0;
+            this.btDelete.HighEmphasis = false;
+            this.btDelete.Icon = null;
+            this.btDelete.Location = new System.Drawing.Point(533, 315);
+            this.btDelete.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btDelete.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btDelete.Name = "btDelete";
+            this.btDelete.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btDelete.Size = new System.Drawing.Size(88, 36);
+            this.btDelete.TabIndex = 28;
+            this.btDelete.Text = "Eliminar";
+            this.btDelete.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            this.btDelete.UseAccentColor = true;
+            this.btDelete.UseVisualStyleBackColor = true;
+            this.btDelete.Click += new System.EventHandler(this.btDelete_Click);
+            // 
+            // btAdd
+            // 
+            this.btAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btAdd.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btAdd.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btAdd.Depth = 0;
+            this.btAdd.HighEmphasis = true;
+            this.btAdd.Icon = null;
+            this.btAdd.Location = new System.Drawing.Point(437, 315);
+            this.btAdd.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btAdd.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btAdd.Name = "btAdd";
+            this.btAdd.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btAdd.Size = new System.Drawing.Size(88, 36);
+            this.btAdd.TabIndex = 27;
+            this.btAdd.Text = "Agregar";
+            this.btAdd.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            this.btAdd.UseAccentColor = true;
+            this.btAdd.UseVisualStyleBackColor = true;
+            this.btAdd.Click += new System.EventHandler(this.btAdd_Click);
+            // 
+            // lbIssues
+            // 
+            this.lbIssues.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbIssues.BackColor = System.Drawing.Color.White;
+            this.lbIssues.BorderColor = System.Drawing.Color.LightGray;
+            this.lbIssues.Depth = 0;
+            this.lbIssues.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lbIssues.Location = new System.Drawing.Point(17, 361);
+            this.lbIssues.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lbIssues.Name = "lbIssues";
+            this.lbIssues.SelectedIndex = -1;
+            this.lbIssues.SelectedItem = null;
+            this.lbIssues.Size = new System.Drawing.Size(605, 147);
+            this.lbIssues.Style = MaterialSkin.Controls.MaterialListBox.ListBoxStyle.TwoLine;
+            this.lbIssues.TabIndex = 26;
+            // 
+            // materialLabel1
+            // 
+            this.materialLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel1.Location = new System.Drawing.Point(17, 325);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(184, 19);
+            this.materialLabel1.TabIndex = 25;
+            this.materialLabel1.Text = "Lista de tareas en marcha";
             // 
             // lbIssuesResult
             // 
             this.lbIssuesResult.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbIssuesResult.FormattingEnabled = true;
-            this.lbIssuesResult.HorizontalScrollbar = true;
-            this.lbIssuesResult.ItemHeight = 15;
-            this.lbIssuesResult.Location = new System.Drawing.Point(12, 115);
+            this.lbIssuesResult.BackColor = System.Drawing.Color.White;
+            this.lbIssuesResult.BorderColor = System.Drawing.Color.LightGray;
+            this.lbIssuesResult.Depth = 0;
+            this.lbIssuesResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lbIssuesResult.Location = new System.Drawing.Point(17, 71);
+            this.lbIssuesResult.MouseState = MaterialSkin.MouseState.HOVER;
             this.lbIssuesResult.Name = "lbIssuesResult";
-            this.lbIssuesResult.Size = new System.Drawing.Size(537, 139);
-            this.lbIssuesResult.TabIndex = 0;
-            // 
-            // btProjectManager
-            // 
-            this.btProjectManager.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btProjectManager.Location = new System.Drawing.Point(424, 8);
-            this.btProjectManager.Name = "btProjectManager";
-            this.btProjectManager.Size = new System.Drawing.Size(125, 23);
-            this.btProjectManager.TabIndex = 6;
-            this.btProjectManager.Text = "Gestionar proyectos";
-            this.btProjectManager.UseVisualStyleBackColor = true;
-            this.btProjectManager.Click += new System.EventHandler(this.btProjectManager_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 15);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Lista de proyectos";
-            // 
-            // cbProjects
-            // 
-            this.cbProjects.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbProjects.FormattingEnabled = true;
-            this.cbProjects.Location = new System.Drawing.Point(12, 37);
-            this.cbProjects.Name = "cbProjects";
-            this.cbProjects.Size = new System.Drawing.Size(537, 23);
-            this.cbProjects.TabIndex = 4;
-            this.cbProjects.SelectedIndexChanged += new System.EventHandler(this.cbProjects_SelectedIndexChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 68);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 15);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Filtrar tareas";
+            this.lbIssuesResult.SelectedIndex = -1;
+            this.lbIssuesResult.SelectedItem = null;
+            this.lbIssuesResult.Size = new System.Drawing.Size(604, 235);
+            this.lbIssuesResult.Style = MaterialSkin.Controls.MaterialListBox.ListBoxStyle.TwoLine;
+            this.lbIssuesResult.TabIndex = 24;
             // 
             // tbFilter
             // 
             this.tbFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbFilter.Location = new System.Drawing.Point(12, 86);
+            this.tbFilter.AnimateReadOnly = false;
+            this.tbFilter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tbFilter.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.tbFilter.Depth = 0;
+            this.tbFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.tbFilter.HideSelection = true;
+            this.tbFilter.Hint = "Filtrar tareas";
+            this.tbFilter.LeadingIcon = null;
+            this.tbFilter.Location = new System.Drawing.Point(17, 17);
+            this.tbFilter.MaxLength = 32767;
+            this.tbFilter.MouseState = MaterialSkin.MouseState.OUT;
             this.tbFilter.Name = "tbFilter";
-            this.tbFilter.Size = new System.Drawing.Size(456, 23);
-            this.tbFilter.TabIndex = 8;
-            // 
-            // btAdd
-            // 
-            this.btAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btAdd.Location = new System.Drawing.Point(393, 272);
-            this.btAdd.Name = "btAdd";
-            this.btAdd.Size = new System.Drawing.Size(75, 23);
-            this.btAdd.TabIndex = 12;
-            this.btAdd.Text = "Agregar";
-            this.btAdd.UseVisualStyleBackColor = true;
-            this.btAdd.Click += new System.EventHandler(this.btAdd_Click);
-            // 
-            // btDelete
-            // 
-            this.btDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btDelete.Location = new System.Drawing.Point(474, 272);
-            this.btDelete.Name = "btDelete";
-            this.btDelete.Size = new System.Drawing.Size(75, 23);
-            this.btDelete.TabIndex = 11;
-            this.btDelete.Text = "Eliminar";
-            this.btDelete.UseVisualStyleBackColor = true;
-            this.btDelete.Click += new System.EventHandler(this.btDelete_Click);
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 276);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(161, 15);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Lista de proyectos en marcha";
-            // 
-            // lbIssues
-            // 
-            this.lbIssues.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbIssues.FormattingEnabled = true;
-            this.lbIssues.HorizontalScrollbar = true;
-            this.lbIssues.ItemHeight = 15;
-            this.lbIssues.Location = new System.Drawing.Point(12, 301);
-            this.lbIssues.Name = "lbIssues";
-            this.lbIssues.Size = new System.Drawing.Size(537, 124);
-            this.lbIssues.TabIndex = 9;
-            // 
-            // btSearch
-            // 
-            this.btSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btSearch.Location = new System.Drawing.Point(474, 86);
-            this.btSearch.Name = "btSearch";
-            this.btSearch.Size = new System.Drawing.Size(75, 23);
-            this.btSearch.TabIndex = 13;
-            this.btSearch.Text = "Buscar";
-            this.btSearch.UseVisualStyleBackColor = true;
-            this.btSearch.Click += new System.EventHandler(this.btSearch_Click);
-            // 
-            // btOk
-            // 
-            this.btOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btOk.Location = new System.Drawing.Point(474, 438);
-            this.btOk.Name = "btOk";
-            this.btOk.Size = new System.Drawing.Size(75, 23);
-            this.btOk.TabIndex = 14;
-            this.btOk.Text = "Listo";
-            this.btOk.UseVisualStyleBackColor = true;
+            this.tbFilter.PasswordChar = '\0';
+            this.tbFilter.PrefixSuffixText = null;
+            this.tbFilter.ReadOnly = false;
+            this.tbFilter.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tbFilter.SelectedText = "";
+            this.tbFilter.SelectionLength = 0;
+            this.tbFilter.SelectionStart = 0;
+            this.tbFilter.ShortcutsEnabled = true;
+            this.tbFilter.Size = new System.Drawing.Size(604, 48);
+            this.tbFilter.TabIndex = 23;
+            this.tbFilter.TabStop = false;
+            this.tbFilter.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.tbFilter.TrailingIcon = global::zTempo.Properties.Resources.seach_icon;
+            this.tbFilter.UseSystemPasswordChar = false;
+            this.tbFilter.TrailingIconClick += new System.EventHandler(this.btSearch_Click);
+            this.tbFilter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbFilter_KeyPress);
             // 
             // FrmIssues
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(561, 473);
-            this.Controls.Add(this.btOk);
-            this.Controls.Add(this.btSearch);
-            this.Controls.Add(this.btAdd);
-            this.Controls.Add(this.btDelete);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.lbIssues);
-            this.Controls.Add(this.tbFilter);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.btProjectManager);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(674, 728);
+            this.Controls.Add(this.materialCard1);
+            this.Controls.Add(this.pbProjects);
             this.Controls.Add(this.cbProjects);
-            this.Controls.Add(this.lbIssuesResult);
             this.Name = "FrmIssues";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tareas";
             this.TopMost = true;
             this.Activated += new System.EventHandler(this.FrmIssues_Activated);
+            ((System.ComponentModel.ISupportInitialize)(this.pbProjects)).EndInit();
+            this.materialCard1.ResumeLayout(false);
+            this.materialCard1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private ListBox lbIssuesResult;
-        private Button btProjectManager;
-        private Label label1;
-        private ComboBox cbProjects;
-        private Label label2;
-        private TextBox tbFilter;
-        private Button btAdd;
-        private Button btDelete;
-        private Label label3;
-        private ListBox lbIssues;
-        private Button btSearch;
-        private Button btOk;
+        private MaterialSkin.Controls.MaterialComboBox cbProjects;
+        private PictureBox pbProjects;
+        private MaterialSkin.Controls.MaterialCard materialCard1;
+        private MaterialSkin.Controls.MaterialButton btOk;
+        private MaterialSkin.Controls.MaterialButton btDelete;
+        private MaterialSkin.Controls.MaterialButton btAdd;
+        private MaterialSkin.Controls.MaterialListBox lbIssues;
+        private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        private MaterialSkin.Controls.MaterialListBox lbIssuesResult;
+        private MaterialSkin.Controls.MaterialTextBox2 tbFilter;
     }
 }
