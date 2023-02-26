@@ -44,6 +44,7 @@ namespace zTempo
         public void InitializeData(Project project)
         {
             cbProjects.Items.Clear();
+            cbProjects.SelectedItem = null;
             var projects = projectService.GetProjects();
             cbProjects.Items.AddRange(projects.ToArray());
             if (project != null)
@@ -63,6 +64,7 @@ namespace zTempo
 
             var issues = await issueService.GetIssuesByName(Project.Key, tbFilter.Text);
             lbIssuesResult.Items.Clear();
+            lbIssuesResult.SelectedItem = null;
             foreach (var item in issues)
             {
                 lbIssuesResult.Items.Add(new MaterialSkin.MaterialListBoxItem
@@ -77,11 +79,11 @@ namespace zTempo
         private void btAdd_Click(object sender, EventArgs e)
         {
             var selected = lbIssuesResult.SelectedItem;
-            if (lbIssuesResult.SelectedItem != null)
+            if (selected != null)
             {
                 if (Issues.Where(x => x.Id.Equals(((Issue)selected.Tag).Id)).FirstOrDefault() == null)
                 {
-                    ((Issue) selected.Tag).Id = Project.Id;
+                    ((Issue) selected.Tag).ProjectId = Project.Id;
                     Issues.Add((Issue)selected.Tag);
                     lbIssues.Items.Add(selected);
                 }
@@ -102,7 +104,9 @@ namespace zTempo
         {
             Project = cbProjects.SelectedItem as Project;
             lbIssuesResult.Items.Clear();
+            lbIssuesResult.SelectedItem = null;
             lbIssues.Items.Clear();
+            lbIssues.SelectedItem = null;
             Issues.Clear();
             if (Project == null) return;
             var issues = issueService.GetIssues(Project.Id);
@@ -129,6 +133,7 @@ namespace zTempo
             if (frmProjects.ShowDialog(this) == DialogResult.OK)
             {
                 cbProjects.Items.Clear();
+                cbProjects.SelectedItem = null;
                 cbProjects.Items.AddRange(frmProjects.Projects.ToArray());
                 projectService.Save(frmProjects.Projects);
             }
@@ -137,6 +142,11 @@ namespace zTempo
         private void FrmIssues_Activated(object sender, EventArgs e)
         {
             TopMost = true;
+        }
+
+        private void btOk_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

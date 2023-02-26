@@ -215,7 +215,7 @@ namespace zTempo
             this.pbMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pbMenu.BackColor = System.Drawing.Color.Transparent;
             this.pbMenu.Image = global::zTempo.Properties.Resources.menu;
-            this.pbMenu.Location = new System.Drawing.Point(524, 30);
+            this.pbMenu.Location = new System.Drawing.Point(567, 30);
             this.pbMenu.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.pbMenu.Name = "pbMenu";
             this.pbMenu.Size = new System.Drawing.Size(29, 27);
@@ -236,7 +236,7 @@ namespace zTempo
             this.materialTabControl1.Multiline = true;
             this.materialTabControl1.Name = "materialTabControl1";
             this.materialTabControl1.SelectedIndex = 0;
-            this.materialTabControl1.Size = new System.Drawing.Size(557, 641);
+            this.materialTabControl1.Size = new System.Drawing.Size(600, 641);
             this.materialTabControl1.TabIndex = 39;
             // 
             // tabPage1
@@ -253,7 +253,7 @@ namespace zTempo
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.tabPage1.Size = new System.Drawing.Size(549, 613);
+            this.tabPage1.Size = new System.Drawing.Size(592, 613);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -266,7 +266,7 @@ namespace zTempo
             this.btRegister.Depth = 0;
             this.btRegister.Icon = global::zTempo.Properties.Resources.tempo;
             this.btRegister.Image = global::zTempo.Properties.Resources.tempo_circle;
-            this.btRegister.Location = new System.Drawing.Point(475, 537);
+            this.btRegister.Location = new System.Drawing.Point(518, 537);
             this.btRegister.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btRegister.MouseState = MaterialSkin.MouseState.HOVER;
             this.btRegister.Name = "btRegister";
@@ -426,7 +426,7 @@ namespace zTempo
             this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard1.Name = "materialCard1";
             this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
-            this.materialCard1.Size = new System.Drawing.Size(531, 456);
+            this.materialCard1.Size = new System.Drawing.Size(574, 456);
             this.materialCard1.TabIndex = 40;
             // 
             // lbIssues
@@ -444,7 +444,7 @@ namespace zTempo
             this.lbIssues.Name = "lbIssues";
             this.lbIssues.SelectedIndex = -1;
             this.lbIssues.SelectedItem = null;
-            this.lbIssues.Size = new System.Drawing.Size(497, 305);
+            this.lbIssues.Size = new System.Drawing.Size(540, 305);
             this.lbIssues.Style = MaterialSkin.Controls.MaterialListBox.ListBoxStyle.TwoLine;
             this.lbIssues.TabIndex = 21;
             // 
@@ -470,7 +470,7 @@ namespace zTempo
             this.tbDetail.SelectionLength = 0;
             this.tbDetail.SelectionStart = 0;
             this.tbDetail.ShortcutsEnabled = true;
-            this.tbDetail.Size = new System.Drawing.Size(497, 111);
+            this.tbDetail.Size = new System.Drawing.Size(540, 111);
             this.tbDetail.TabIndex = 25;
             this.tbDetail.TabStop = false;
             this.tbDetail.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -514,10 +514,10 @@ namespace zTempo
             this.cbProjects.MaxDropDownItems = 4;
             this.cbProjects.MouseState = MaterialSkin.MouseState.OUT;
             this.cbProjects.Name = "cbProjects";
-            this.cbProjects.Size = new System.Drawing.Size(531, 49);
+            this.cbProjects.Size = new System.Drawing.Size(574, 49);
             this.cbProjects.StartIndex = 0;
             this.cbProjects.TabIndex = 37;
-            this.cbProjects.SelectionChangeCommitted += new System.EventHandler(this.cbProjects_SelectedIndexChanged);
+            this.cbProjects.SelectedIndexChanged += new System.EventHandler(this.cbProjects_SelectedIndexChanged);
             // 
             // tabPage2
             // 
@@ -525,7 +525,7 @@ namespace zTempo
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.tabPage2.Size = new System.Drawing.Size(549, 613);
+            this.tabPage2.Size = new System.Drawing.Size(592, 613);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -534,7 +534,7 @@ namespace zTempo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(561, 707);
+            this.ClientSize = new System.Drawing.Size(604, 707);
             this.Controls.Add(this.materialTabControl1);
             this.Controls.Add(this.pbMenu);
             this.Controls.Add(this.materialDrawer2);

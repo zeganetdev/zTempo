@@ -124,6 +124,7 @@
             this.btOk.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btOk.UseAccentColor = false;
             this.btOk.UseVisualStyleBackColor = true;
+            this.btOk.Click += new System.EventHandler(this.btOk_Click);
             // 
             // btDelete
             // 

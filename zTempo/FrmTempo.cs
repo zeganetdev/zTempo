@@ -62,6 +62,7 @@ namespace zTempo
         private void InitializeData()
         {
             cbProjects.Items.Clear();
+            cbProjects.SelectedItem = null;
             cbProjects.Items.AddRange(projectService.GetProjects().ToArray());
         }
 
@@ -91,6 +92,7 @@ namespace zTempo
         {
             var project = cbProjects.SelectedItem as Project;
             lbIssues.Items.Clear();
+            lbIssues.SelectedItem = null;
             if (project != null)
                 issueService.GetIssues(project.Id).ForEach(x => lbIssues.Items.Add(new MaterialListBoxItem { Text = x.Fields.Summary, SecondaryText = x.Key, Tag = x })); 
             //lbIssues.Items.AddRange(issueService.GetIssues(project.Id).ToArray());
@@ -166,7 +168,7 @@ namespace zTempo
             }
         }
 
-        private void btRegister_Click(object sender, EventArgs e)
+        private async void btRegister_Click(object sender, EventArgs e)
         {
             //tiZumdido.Enabled = !tiZumdido.Enabled;
             //if (tiZumdido.Enabled) zumdido = 20;
@@ -185,17 +187,17 @@ namespace zTempo
             var billable = chBillable.Checked ? "Billable" : "NonBillable";
             var timeSpentSeconds = (duration.Hour * 3600) + (duration.Minute * 60);
 
-            //await worklogService.SaveAsync(new Worklog
-            //{
-            //    Attributes = new List<WorklogAttribute> { new WorklogAttribute { Key = "_Billable_", Value = billable } },
-            //    //BillableSeconds = chBillable.Checked ? timeSpentSeconds : 0,
-            //    Description = tbDetail.Text,
-            //    StartDate = date,
-            //    StartTime = $"{time}:00",
-            //    TimeSpentSeconds = timeSpentSeconds,
-            //    IssueId = int.Parse(issue.Id),
-            //    AuthorAccountId = "6126724bd7cac600696d6281"
-            //});
+            await worklogService.SaveAsync(new Worklog
+            {
+                Attributes = new List<WorklogAttribute> { new WorklogAttribute { Key = "_Billable_", Value = billable } },
+                //BillableSeconds = chBillable.Checked ? timeSpentSeconds : 0,
+                Description = tbDetail.Text,
+                StartDate = date,
+                StartTime = $"{time}:00",
+                TimeSpentSeconds = timeSpentSeconds,
+                IssueId = int.Parse(issue.Id),
+                AuthorAccountId = "6126724bd7cac600696d6281"
+            });
             TopMost = false;
             ZMessage.InformationModal(this, "Registrado con exito");
             TopMost = true;
@@ -209,6 +211,7 @@ namespace zTempo
             if (frmProjects.ShowDialog(this) == DialogResult.OK)
             {
                 cbProjects.Items.Clear();
+                cbProjects.SelectedItem = null;
                 cbProjects.Items.AddRange(frmProjects.Projects.ToArray());
                 projectService.Save(frmProjects.Projects);
             }
@@ -220,11 +223,11 @@ namespace zTempo
             if (frmIssues.ShowDialog(this) == DialogResult.OK)
             {
                 lbIssues.Items.Clear();
+                lbIssues.SelectedItem = null;
                 frmIssues.Issues.ForEach(x => lbIssues.Items.Add(new MaterialListBoxItem { Text = x.Fields.Summary, SecondaryText = x.Key, Tag = x }));
                 //lbIssues.Items.Add(frmIssues.Issues.ToArray());
                 issueService.Save(frmIssues.Issues);
-                var index = cbProjects.FindStringExact(frmIssues.Project?.ToString());
-                if (index == -1) InitializeData();
+                InitializeData();
                 cbProjects.SelectedIndex = cbProjects.FindStringExact(frmIssues.Project?.ToString());
             }
         }
