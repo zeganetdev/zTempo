@@ -9,6 +9,7 @@ namespace zTempo.Application
 {
     public interface IProjectService
     {
+        bool IsConfigurated();
         Task<List<Project>> GetProjectsByName(string name);
         List<Project> GetProjects();
         void Save(List<Project> projects);

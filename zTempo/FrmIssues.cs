@@ -46,6 +46,7 @@ namespace zTempo
             cbProjects.Items.Clear();
             cbProjects.SelectedItem = null;
             var projects = projectService.GetProjects();
+            if (projects == null) return;
             cbProjects.Items.AddRange(projects.ToArray());
             if (project != null)
             {

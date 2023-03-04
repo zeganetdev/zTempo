@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
+using System.Reflection;
 using System.Text.Json;
 using zTempo.Persistence.Entity;
+
+
 
 namespace zTempo.Persistence.SeedWork
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        const string fileName = "db.json";
+        readonly string fileName = $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\\db.json";
         private readonly JsonSerializerOptions jsonOptions;
         private EntityRoot entityRoot;
 

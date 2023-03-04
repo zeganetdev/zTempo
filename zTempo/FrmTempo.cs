@@ -1,6 +1,7 @@
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Diagnostics.Metrics;
 using System.Globalization;
 using System.Linq;
@@ -10,6 +11,7 @@ using zTempo.Helpers;
 using zTempo.Models;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrayNotify;
 using ZMessage = zTempo.Helpers.ZMessage;
+using App = System.Windows.Forms.Application;
 
 namespace zTempo
 {
@@ -22,9 +24,14 @@ namespace zTempo
         private readonly IProjectService projectService;
         private readonly IIssueService issueService;
         private readonly IWorklogService worklogService;
-        private bool applicationExit = false;
+        private readonly IUserService userService;
+
+        public bool ApplicationExit { get; set; } = false;
 
         private int buzz = 20;
+
+        private const int WM_USER = 0x0400;
+        private const int WM_MYMESSAGE = WM_USER + 33;
 
         public FrmTempo(FrmProjects frmProjects, 
                         FrmIssues frmIssues, 
@@ -32,10 +39,11 @@ namespace zTempo
                         FrmPopup frmPopup,
                         IProjectService projectService, 
                         IIssueService issueService, 
-                        IWorklogService worklogService)
+                        IWorklogService worklogService, IUserService userService)
         {
             InitializeComponent();
             ApplyTheme();
+
             this.frmProjects = frmProjects;
             this.frmIssues = frmIssues;
             this.frmConfiguration = frmConfiguration;
@@ -43,6 +51,8 @@ namespace zTempo
             this.projectService = projectService;
             this.issueService = issueService;
             this.worklogService = worklogService;
+            this.userService = userService;
+            
             InitializeData();
         }
 
@@ -65,6 +75,10 @@ namespace zTempo
         {
             cbProjects.Items.Clear();
             cbProjects.SelectedItem = null;
+            var projects = projectService.GetProjects();
+            if (projects == null) {
+                return; 
+            }
             cbProjects.Items.AddRange(projectService.GetProjects().ToArray());
         }
 
@@ -133,7 +147,7 @@ namespace zTempo
 
         private void FormTempo_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!applicationExit)
+            if (!ApplicationExit)
             {
                 e.Cancel = true;
                 Hide();
@@ -146,9 +160,18 @@ namespace zTempo
             InitializeValueDefault();
         }
 
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == WM_MYMESSAGE)
+            {
+                tsOpen_Click(null, new EventArgs());
+            }
+            base.WndProc(ref m);
+        }
+
         private void tsExit_Click(object sender, EventArgs e)
         {
-            applicationExit = true;
+            ApplicationExit = true;
             System.Windows.Forms.Application.Exit();
         }
 
@@ -182,6 +205,7 @@ namespace zTempo
         {
             if (!frmConfiguration.Created)
             {
+                frmConfiguration.FrmTempo = this;
                 frmConfiguration.InitializeData();
                 frmConfiguration.ShowDialog();
             }
@@ -221,7 +245,7 @@ namespace zTempo
                     StartTime = $"{time}:00",
                     TimeSpentSeconds = timeSpentSeconds,
                     IssueId = int.Parse(issue.Id),
-                    AuthorAccountId = "6126724bd7cac600696d6281"
+                    AuthorAccountId = userService.GetUser().AccountId //Sandy 60e5cd97e7b4fd006a756888 // Edgard 6126724bd7cac600696d6281
                 });
             }
             ZMessage.InformationModal(this, "Registrado con exito");
@@ -267,6 +291,30 @@ namespace zTempo
         private void FrmTempo_Activated(object sender, EventArgs e)
         {
             TopMost = true;
+        }
+
+        private void FrmTempo_Shown(object sender, EventArgs e)
+        {
+            var configurated = projectService.IsConfigurated();
+            if (!configurated)
+            {
+                Hide();
+                tsConfigurationConnect_Click(null, new EventArgs());
+                configurated = projectService.IsConfigurated();
+                if (configurated)
+                {
+                    ProcessStartInfo currentStartInfo = new ProcessStartInfo();
+                    currentStartInfo.FileName = App.ExecutablePath;
+                    ApplicationExit = true;
+                    App.Exit();
+                    Process.Start(currentStartInfo);
+                }
+                else
+                {
+                    ApplicationExit = true;
+                    App.Exit();
+                }
+            }
         }
     }
 }

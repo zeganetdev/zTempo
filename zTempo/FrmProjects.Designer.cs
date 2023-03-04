@@ -212,6 +212,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(609, 691);
             this.Controls.Add(this.materialCard1);
+            this.MinimizeBox = false;
             this.Name = "FrmProjects";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

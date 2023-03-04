@@ -7,5 +7,6 @@ namespace zTempo.Persistence.Entity
         public List<Project> Projects { get; set; }
         public List<Issue> Issues { get; set; }
         public List<Configuration> Configurations { get; set; }
+        public List<User> Users { get; set; }
     }
 }

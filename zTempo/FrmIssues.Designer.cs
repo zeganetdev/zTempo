@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cbProjects = new MaterialSkin.Controls.MaterialComboBox();
-            this.pbProjects = new System.Windows.Forms.PictureBox();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
             this.btOk = new MaterialSkin.Controls.MaterialButton();
             this.btDelete = new MaterialSkin.Controls.MaterialButton();
@@ -38,48 +36,13 @@
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.lbIssuesResult = new MaterialSkin.Controls.MaterialListBox();
             this.tbFilter = new MaterialSkin.Controls.MaterialTextBox2();
-            ((System.ComponentModel.ISupportInitialize)(this.pbProjects)).BeginInit();
+            this.materialCard2 = new MaterialSkin.Controls.MaterialCard();
+            this.pbProjects = new System.Windows.Forms.PictureBox();
+            this.cbProjects = new MaterialSkin.Controls.MaterialComboBox();
             this.materialCard1.SuspendLayout();
+            this.materialCard2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbProjects)).BeginInit();
             this.SuspendLayout();
-            // 
-            // cbProjects
-            // 
-            this.cbProjects.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbProjects.AutoResize = false;
-            this.cbProjects.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.cbProjects.Depth = 0;
-            this.cbProjects.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cbProjects.DropDownHeight = 174;
-            this.cbProjects.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbProjects.DropDownWidth = 121;
-            this.cbProjects.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.cbProjects.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.cbProjects.FormattingEnabled = true;
-            this.cbProjects.Hint = "Lista de proyectos";
-            this.cbProjects.IntegralHeight = false;
-            this.cbProjects.ItemHeight = 43;
-            this.cbProjects.Location = new System.Drawing.Point(17, 75);
-            this.cbProjects.MaxDropDownItems = 4;
-            this.cbProjects.MouseState = MaterialSkin.MouseState.OUT;
-            this.cbProjects.Name = "cbProjects";
-            this.cbProjects.Size = new System.Drawing.Size(640, 49);
-            this.cbProjects.StartIndex = 0;
-            this.cbProjects.TabIndex = 15;
-            this.cbProjects.SelectedIndexChanged += new System.EventHandler(this.cbProjects_SelectedIndexChanged);
-            // 
-            // pbProjects
-            // 
-            this.pbProjects.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbProjects.BackColor = System.Drawing.Color.Transparent;
-            this.pbProjects.Image = global::zTempo.Properties.Resources.menu2;
-            this.pbProjects.Location = new System.Drawing.Point(615, 86);
-            this.pbProjects.Name = "pbProjects";
-            this.pbProjects.Size = new System.Drawing.Size(32, 28);
-            this.pbProjects.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbProjects.TabIndex = 23;
-            this.pbProjects.TabStop = false;
-            this.pbProjects.Click += new System.EventHandler(this.pbProjects_Click);
             // 
             // materialCard1
             // 
@@ -96,12 +59,12 @@
             this.materialCard1.Controls.Add(this.tbFilter);
             this.materialCard1.Depth = 0;
             this.materialCard1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialCard1.Location = new System.Drawing.Point(17, 141);
+            this.materialCard1.Location = new System.Drawing.Point(17, 153);
             this.materialCard1.Margin = new System.Windows.Forms.Padding(14);
             this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard1.Name = "materialCard1";
             this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
-            this.materialCard1.Size = new System.Drawing.Size(640, 570);
+            this.materialCard1.Size = new System.Drawing.Size(640, 588);
             this.materialCard1.TabIndex = 24;
             // 
             // btOk
@@ -113,7 +76,7 @@
             this.btOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btOk.HighEmphasis = true;
             this.btOk.Icon = null;
-            this.btOk.Location = new System.Drawing.Point(558, 517);
+            this.btOk.Location = new System.Drawing.Point(558, 535);
             this.btOk.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btOk.MouseState = MaterialSkin.MouseState.HOVER;
             this.btOk.Name = "btOk";
@@ -134,7 +97,7 @@
             this.btDelete.Depth = 0;
             this.btDelete.HighEmphasis = false;
             this.btDelete.Icon = null;
-            this.btDelete.Location = new System.Drawing.Point(533, 315);
+            this.btDelete.Location = new System.Drawing.Point(533, 333);
             this.btDelete.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btDelete.MouseState = MaterialSkin.MouseState.HOVER;
             this.btDelete.Name = "btDelete";
@@ -155,7 +118,7 @@
             this.btAdd.Depth = 0;
             this.btAdd.HighEmphasis = true;
             this.btAdd.Icon = null;
-            this.btAdd.Location = new System.Drawing.Point(437, 315);
+            this.btAdd.Location = new System.Drawing.Point(437, 333);
             this.btAdd.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btAdd.MouseState = MaterialSkin.MouseState.HOVER;
             this.btAdd.Name = "btAdd";
@@ -176,7 +139,7 @@
             this.lbIssues.BorderColor = System.Drawing.Color.LightGray;
             this.lbIssues.Depth = 0;
             this.lbIssues.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lbIssues.Location = new System.Drawing.Point(17, 361);
+            this.lbIssues.Location = new System.Drawing.Point(17, 379);
             this.lbIssues.MouseState = MaterialSkin.MouseState.HOVER;
             this.lbIssues.Name = "lbIssues";
             this.lbIssues.SelectedIndex = -1;
@@ -191,7 +154,7 @@
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.Location = new System.Drawing.Point(17, 325);
+            this.materialLabel1.Location = new System.Drawing.Point(17, 343);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(184, 19);
@@ -212,7 +175,7 @@
             this.lbIssuesResult.Name = "lbIssuesResult";
             this.lbIssuesResult.SelectedIndex = -1;
             this.lbIssuesResult.SelectedItem = null;
-            this.lbIssuesResult.Size = new System.Drawing.Size(604, 235);
+            this.lbIssuesResult.Size = new System.Drawing.Size(604, 253);
             this.lbIssuesResult.Style = MaterialSkin.Controls.MaterialListBox.ListBoxStyle.TwoLine;
             this.lbIssuesResult.TabIndex = 24;
             // 
@@ -249,30 +212,83 @@
             this.tbFilter.TrailingIconClick += new System.EventHandler(this.btSearch_Click);
             this.tbFilter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbFilter_KeyPress);
             // 
+            // materialCard2
+            // 
+            this.materialCard2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard2.Controls.Add(this.pbProjects);
+            this.materialCard2.Controls.Add(this.cbProjects);
+            this.materialCard2.Depth = 0;
+            this.materialCard2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialCard2.Location = new System.Drawing.Point(17, 78);
+            this.materialCard2.Margin = new System.Windows.Forms.Padding(14);
+            this.materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCard2.Name = "materialCard2";
+            this.materialCard2.Padding = new System.Windows.Forms.Padding(14);
+            this.materialCard2.Size = new System.Drawing.Size(640, 67);
+            this.materialCard2.TabIndex = 25;
+            // 
+            // pbProjects
+            // 
+            this.pbProjects.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbProjects.BackColor = System.Drawing.Color.Transparent;
+            this.pbProjects.Image = global::zTempo.Properties.Resources.menu2;
+            this.pbProjects.Location = new System.Drawing.Point(557, 20);
+            this.pbProjects.Name = "pbProjects";
+            this.pbProjects.Size = new System.Drawing.Size(32, 28);
+            this.pbProjects.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbProjects.TabIndex = 25;
+            this.pbProjects.TabStop = false;
+            this.pbProjects.Click += new System.EventHandler(this.pbProjects_Click);
+            // 
+            // cbProjects
+            // 
+            this.cbProjects.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbProjects.AutoResize = false;
+            this.cbProjects.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cbProjects.Depth = 0;
+            this.cbProjects.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cbProjects.DropDownHeight = 174;
+            this.cbProjects.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbProjects.DropDownWidth = 121;
+            this.cbProjects.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cbProjects.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cbProjects.FormattingEnabled = true;
+            this.cbProjects.Hint = "Lista de proyectos";
+            this.cbProjects.IntegralHeight = false;
+            this.cbProjects.ItemHeight = 43;
+            this.cbProjects.Location = new System.Drawing.Point(17, 9);
+            this.cbProjects.MaxDropDownItems = 4;
+            this.cbProjects.MouseState = MaterialSkin.MouseState.OUT;
+            this.cbProjects.Name = "cbProjects";
+            this.cbProjects.Size = new System.Drawing.Size(604, 49);
+            this.cbProjects.StartIndex = 0;
+            this.cbProjects.TabIndex = 24;
+            this.cbProjects.SelectedIndexChanged += new System.EventHandler(this.cbProjects_SelectedIndexChanged);
+            // 
             // FrmIssues
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(674, 728);
+            this.ClientSize = new System.Drawing.Size(674, 758);
             this.Controls.Add(this.materialCard1);
-            this.Controls.Add(this.pbProjects);
-            this.Controls.Add(this.cbProjects);
+            this.Controls.Add(this.materialCard2);
+            this.MinimizeBox = false;
             this.Name = "FrmIssues";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tareas";
             this.TopMost = true;
             this.Activated += new System.EventHandler(this.FrmIssues_Activated);
-            ((System.ComponentModel.ISupportInitialize)(this.pbProjects)).EndInit();
             this.materialCard1.ResumeLayout(false);
             this.materialCard1.PerformLayout();
+            this.materialCard2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbProjects)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private MaterialSkin.Controls.MaterialComboBox cbProjects;
-        private PictureBox pbProjects;
         private MaterialSkin.Controls.MaterialCard materialCard1;
         private MaterialSkin.Controls.MaterialButton btOk;
         private MaterialSkin.Controls.MaterialButton btDelete;
@@ -281,5 +297,8 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private MaterialSkin.Controls.MaterialListBox lbIssuesResult;
         private MaterialSkin.Controls.MaterialTextBox2 tbFilter;
+        private MaterialSkin.Controls.MaterialCard materialCard2;
+        private PictureBox pbProjects;
+        private MaterialSkin.Controls.MaterialComboBox cbProjects;
     }
 }

@@ -499,6 +499,7 @@ namespace zTempo
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.MinimizeBox = false;
             this.Name = "FrmTempo";
             this.Padding = new System.Windows.Forms.Padding(0, 63, 4, 3);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -507,6 +508,7 @@ namespace zTempo
             this.Activated += new System.EventHandler(this.FrmTempo_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormTempo_FormClosing);
             this.Load += new System.EventHandler(this.FormTempo_Load);
+            this.Shown += new System.EventHandler(this.FrmTempo_Shown);
             this.cmTempo.ResumeLayout(false);
             this.cmOptions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbMenu)).EndInit();

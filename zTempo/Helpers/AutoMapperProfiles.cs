@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using zTempo.CrossCutting.Agents.JiraProxy.Entity;
 using zTempo.CrossCutting.Agents.TempoProxy.Entity;
 using zTempo.Models;
+using User = zTempo.Models.User;
 
 namespace zTempo.Helpers
 {
@@ -18,6 +19,7 @@ namespace zTempo.Helpers
             CreateMap<Project, JiraProject>().ReverseMap();
             CreateMap<Issue, JiraIssue>().ReverseMap();
             CreateMap<Field, JiraField>().ReverseMap();
+            CreateMap<User, JiraUser>().ReverseMap();
 
             CreateMap<Worklog, TempoWorklog>().ReverseMap();
             CreateMap<WorklogAttribute, TempoAttribute>().ReverseMap();

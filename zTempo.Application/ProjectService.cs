@@ -30,6 +30,12 @@ namespace zTempo.Application
             this.proxyJira.Authenticate(user, token);
         }
 
+        public bool IsConfigurated()
+        {
+            var configurations = configurationService.GetConfigurations();
+            return configurations.Count() != 0;
+        }
+
         public async Task<List<Project>> GetProjectsByName(string name)
         {
             var result = await proxyJira.GetProjectsByNameAsync(name);

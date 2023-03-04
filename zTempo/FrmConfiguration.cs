@@ -16,6 +16,8 @@ using zTempo.Application;
 using zTempo.CrossCutting.Utilities;
 using MaterialSkin.Controls;
 using MaterialSkin;
+using zTempo.Helpers;
+using App = System.Windows.Forms.Application;
 
 namespace zTempo
 {
@@ -23,13 +25,17 @@ namespace zTempo
     {
         const string urlLocal = "http://localhost:3693";
 
-        private IConfigurationService configurationService;
+        private readonly IConfigurationService configurationService;
+        private readonly IUserService userService;
 
-        public FrmConfiguration(IConfigurationService configurationService)
+        public FrmTempo FrmTempo { get; set; }
+
+        public FrmConfiguration(IConfigurationService configurationService, IUserService userService)
         {
             InitializeComponent();
             ApplyTheme();
             this.configurationService = configurationService;
+            this.userService = userService;
         }
 
         private void ApplyTheme()
@@ -132,12 +138,30 @@ namespace zTempo
         {
             configurationService.Save(new Models.Configuration { Field = Constants.JIRA_EMAIL, Value = tbEmail.Text });
             configurationService.Save(new Models.Configuration { Field = Constants.JIRA_TOKEN, Value = tbTokenJira.Text });
+            materialExpansionPanel2.Collapse = false;
         }
 
         private void lnkConfigurationJira_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("explorer", $"{lnkConfigurationJira.Text}");
+            
         }
 
+        private async void btTest_Click(object sender, EventArgs e)
+        {
+            userService.ConfigurateJira();
+            var user = await userService.GetUserAsync();
+            ZMessage.Information(this, $"Esta conectado a: {user.DisplayName}", 5000);
+            userService.Save(user);
+        }
+
+        public void btRestart_Click(object sender, EventArgs e)
+        {
+            ProcessStartInfo currentStartInfo = new ProcessStartInfo();
+            currentStartInfo.FileName = App.ExecutablePath;
+            FrmTempo.ApplicationExit = true;
+            App.Exit();
+            Process.Start(currentStartInfo);
+        }
     }
 }

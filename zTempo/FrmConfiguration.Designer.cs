@@ -52,6 +52,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.lnkConfigurationTempo = new System.Windows.Forms.LinkLabel();
             this.label2 = new System.Windows.Forms.Label();
+            this.btTest = new MaterialSkin.Controls.MaterialButton();
             this.flowLayoutPanel1.SuspendLayout();
             this.materialExpansionPanel2.SuspendLayout();
             this.materialExpansionPanel1.SuspendLayout();
@@ -61,10 +62,13 @@
             // 
             this.flowLayoutPanel1.Controls.Add(this.materialExpansionPanel2);
             this.flowLayoutPanel1.Controls.Add(this.materialExpansionPanel1);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(7, 66);
+            this.flowLayoutPanel1.Controls.Add(this.btTest);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 64);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 16, 16, 16);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(822, 471);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(770, 549);
             this.flowLayoutPanel1.TabIndex = 5;
             // 
             // materialExpansionPanel2
@@ -88,15 +92,18 @@
             this.materialExpansionPanel2.ExpandHeight = 425;
             this.materialExpansionPanel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialExpansionPanel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialExpansionPanel2.Location = new System.Drawing.Point(16, 17);
+            this.materialExpansionPanel2.Location = new System.Drawing.Point(32, 17);
             this.materialExpansionPanel2.Margin = new System.Windows.Forms.Padding(16, 1, 16, 0);
             this.materialExpansionPanel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialExpansionPanel2.Name = "materialExpansionPanel2";
             this.materialExpansionPanel2.Padding = new System.Windows.Forms.Padding(24, 64, 24, 16);
-            this.materialExpansionPanel2.Size = new System.Drawing.Size(790, 48);
+            this.materialExpansionPanel2.Size = new System.Drawing.Size(706, 48);
             this.materialExpansionPanel2.TabIndex = 8;
             this.materialExpansionPanel2.Title = "Jira";
+            this.materialExpansionPanel2.UseAccentColor = true;
+            this.materialExpansionPanel2.ValidationButtonEnable = true;
             this.materialExpansionPanel2.ValidationButtonText = "Guardar";
+            this.materialExpansionPanel2.SaveClick += new System.EventHandler(this.btConnetJira_Click);
             // 
             // tbEmail
             // 
@@ -184,6 +191,7 @@
             this.lnkConfigurationJira.TabIndex = 35;
             this.lnkConfigurationJira.TabStop = true;
             this.lnkConfigurationJira.Text = "https://id.atlassian.com/manage-profile/security/api-tokens";
+            this.lnkConfigurationJira.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkConfigurationJira_LinkClicked);
             // 
             // label14
             // 
@@ -225,15 +233,18 @@
             this.materialExpansionPanel1.ExpandHeight = 373;
             this.materialExpansionPanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialExpansionPanel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialExpansionPanel1.Location = new System.Drawing.Point(16, 66);
+            this.materialExpansionPanel1.Location = new System.Drawing.Point(32, 66);
             this.materialExpansionPanel1.Margin = new System.Windows.Forms.Padding(16, 1, 16, 0);
             this.materialExpansionPanel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialExpansionPanel1.Name = "materialExpansionPanel1";
             this.materialExpansionPanel1.Padding = new System.Windows.Forms.Padding(24, 64, 24, 16);
-            this.materialExpansionPanel1.Size = new System.Drawing.Size(790, 48);
+            this.materialExpansionPanel1.Size = new System.Drawing.Size(706, 48);
             this.materialExpansionPanel1.TabIndex = 7;
             this.materialExpansionPanel1.Title = "Tempo";
+            this.materialExpansionPanel1.UseAccentColor = true;
+            this.materialExpansionPanel1.ValidationButtonEnable = true;
             this.materialExpansionPanel1.ValidationButtonText = "Guardar";
+            this.materialExpansionPanel1.SaveClick += new System.EventHandler(this.btConnectTempo_Click);
             // 
             // tbTokenTempo
             // 
@@ -325,6 +336,7 @@
             this.lnkConfigurationTempo.TabStop = true;
             this.lnkConfigurationTempo.Text = "https://multiplica.atlassian.net/plugins/servlet/ac/io.tempo.jira/tempo-app#!/con" +
     "figuration/api-integration";
+            this.lnkConfigurationTempo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkConfigurationTempo_LinkClicked);
             // 
             // label2
             // 
@@ -336,18 +348,42 @@
             this.label2.TabIndex = 27;
             this.label2.Text = "3- En el campo \"Nombre\", ingrese el nombre \"AppTempo\" o el de su preferencia";
             // 
+            // btTest
+            // 
+            this.btTest.AutoSize = false;
+            this.btTest.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btTest.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btTest.Depth = 0;
+            this.btTest.HighEmphasis = true;
+            this.btTest.Icon = null;
+            this.btTest.Location = new System.Drawing.Point(561, 120);
+            this.btTest.Margin = new System.Windows.Forms.Padding(4, 6, 16, 6);
+            this.btTest.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btTest.Name = "btTest";
+            this.btTest.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btTest.Size = new System.Drawing.Size(177, 36);
+            this.btTest.TabIndex = 9;
+            this.btTest.Text = "Realizar test";
+            this.btTest.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btTest.UseAccentColor = true;
+            this.btTest.UseVisualStyleBackColor = true;
+            this.btTest.Click += new System.EventHandler(this.btTest_Click);
+            // 
             // FrmConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(816, 604);
+            this.ClientSize = new System.Drawing.Size(777, 616);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FrmConfiguration";
-            this.Padding = new System.Windows.Forms.Padding(4, 63, 4, 3);
+            this.Padding = new System.Windows.Forms.Padding(3, 64, 4, 3);
+            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Configuración";
             this.TopMost = true;
@@ -386,5 +422,6 @@
         private Label label3;
         private LinkLabel lnkConfigurationTempo;
         private Label label2;
+        private MaterialSkin.Controls.MaterialButton btTest;
     }
 }

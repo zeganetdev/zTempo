@@ -16,7 +16,15 @@ namespace zTempo.CrossCutting.Agents.JiraProxy
 
         public void Authenticate(string user, string token)
         {
+            if (user == null || token == null) return;
             _restService.Client.SetBasicAuthentication(user, token);
+        }
+
+        public async Task<JiraUser> GetUserAsync()
+        {
+            string url = $"{UrlBase}/rest/api/2/myself";
+            var result = await _restService.GetAsync<JiraUser>(url, new Dictionary<string, string>());
+            return result;
         }
 
         public async Task<List<JiraIssue>> GetIssuesByNameAsync(string projectKey, string sumary)

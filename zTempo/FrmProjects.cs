@@ -42,6 +42,7 @@ namespace zTempo
         private void InitializeData()
         {
             Projects = projectService.GetProjects();
+            if (Projects == null) return;
             Projects.ForEach(x => lbProjects.Items.Add(new MaterialListBoxItem
             {
                 Text = x.Name,
