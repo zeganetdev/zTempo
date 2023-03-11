@@ -74,8 +74,8 @@ namespace zTempo
         {
             services.AddSingleton<FrmPopup>();
             services.AddSingleton<FrmTempo>();
-            services.AddSingleton<FrmProjects>();
-            services.AddSingleton<FrmIssues>();
+            //services.AddSingleton<FrmProjects>();
+            //services.AddSingleton<FrmIssues>();
             services.AddSingleton<FrmConfiguration>();
 
             services.AddTransient<IProjectRepository, ProjectRepository>();

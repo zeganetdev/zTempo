@@ -12,5 +12,6 @@ namespace zTempo.Application
         Task<List<Issue>> GetIssuesByName(string projectKey, string summary);
         List<Issue> GetIssues(string projectId);
         void Save(List<Issue> issues);
+        void Remove(Issue issue);
     }
 }

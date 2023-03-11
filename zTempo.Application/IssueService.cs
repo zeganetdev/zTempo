@@ -52,8 +52,21 @@ namespace zTempo.Application
             issues.ForEach(x =>
             {
                 var issue = issuesAll.Where(y => y.Id.Equals(x.Id)).FirstOrDefault();
-                if (issue == null) issuesAll.Add(x);
+                if (issue == null) 
+                    issuesAll.Add(x);
             });
+
+            issueRepository.SaveChanges(issuesAll);
+        }
+
+        public void Remove(Issue issue)
+        {
+            var issuesAll = issueRepository.GetList();
+            if (issuesAll == null) issuesAll = new List<Issue>();
+
+            var item = issuesAll.Where(y => y.Id.Equals(issue.Id)).FirstOrDefault();
+            if (item != null)
+                issuesAll.Remove(item);
 
             issueRepository.SaveChanges(issuesAll);
         }

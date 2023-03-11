@@ -30,7 +30,8 @@ namespace zTempo.CrossCutting.Agents.JiraProxy
         public async Task<List<JiraIssue>> GetIssuesByNameAsync(string projectKey, string sumary)
         {
             string url = $"{UrlBase}/rest/api/2/search";
-            string jql = $"project={projectKey} and summary~\"{sumary}\"";
+            string filter = $" and summary~\"{sumary}\"";
+            string jql = $"project={projectKey}" + (string.IsNullOrEmpty(sumary) ? string.Empty : filter);
             var result = await _restService.GetAsync<JiraResponseBase<List<JiraIssue>>>(url, new Dictionary<string, string> { { "jql", jql }, { "fields", "id,summary" } });
             return result.Issues;
         }

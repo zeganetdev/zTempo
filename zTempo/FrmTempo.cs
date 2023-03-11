@@ -17,8 +17,6 @@ namespace zTempo
 {
     public partial class FrmTempo : MaterialForm
     {
-        private readonly FrmProjects frmProjects;
-        private readonly FrmIssues frmIssues;
         private readonly FrmConfiguration frmConfiguration;
         private readonly FrmPopup frmPopup;
         private readonly IProjectService projectService;
@@ -33,19 +31,16 @@ namespace zTempo
         private const int WM_USER = 0x0400;
         private const int WM_MYMESSAGE = WM_USER + 33;
 
-        public FrmTempo(FrmProjects frmProjects, 
-                        FrmIssues frmIssues, 
-                        FrmConfiguration frmConfiguration, 
+        public FrmTempo(FrmConfiguration frmConfiguration, 
                         FrmPopup frmPopup,
                         IProjectService projectService, 
                         IIssueService issueService, 
-                        IWorklogService worklogService, IUserService userService)
+                        IWorklogService worklogService, 
+                        IUserService userService)
         {
             InitializeComponent();
             ApplyTheme();
 
-            this.frmProjects = frmProjects;
-            this.frmIssues = frmIssues;
             this.frmConfiguration = frmConfiguration;
             this.frmPopup = frmPopup;
             this.projectService = projectService;
@@ -54,22 +49,15 @@ namespace zTempo
             this.userService = userService;
             
             InitializeData();
+
         }
 
         private void ApplyTheme()
         {
-            var materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.EnforceBackcolorOnAllComponents = true;
-            materialSkinManager.AddFormToManage(this);
-
-            materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
-            //materialSkinManager.ColorScheme = new ColorScheme(Primary.Green200,
-            //                                                  Primary.Green900,
-            //                                                  Primary.Green500,
-            //                                                  Accent.Blue100,
-            //                                                  TextShade.WHITE);
+            ZThemes.ThemeMultiplicaGreen(this);
         }
+
+        #region Tempo
 
         private void InitializeData()
         {
@@ -80,6 +68,8 @@ namespace zTempo
                 return; 
             }
             cbProjects.Items.AddRange(projectService.GetProjects().ToArray());
+            lbIssues.Items.Clear();
+            lbIssues.SelectedItem = null;
         }
 
         private void InitializeValueDefault()
@@ -102,18 +92,12 @@ namespace zTempo
             }
         }
 
-        private void btProjectManager_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void FormTempo_Load(object sender, EventArgs e)
         {
             InitializeValueDefault();
             niTempo.Visible = true;
             frmPopup.FrmTempo = this;
         }
-
 
         private void cbProjects_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -122,11 +106,7 @@ namespace zTempo
             lbIssues.SelectedItem = null;
             if (project != null)
                 issueService.GetIssues(project.Id).ForEach(x => lbIssues.Items.Add(new MaterialListBoxItem { Text = x.Fields.Summary, SecondaryText = x.Key, Tag = x })); 
-            //lbIssues.Items.AddRange(issueService.GetIssues(project.Id).ToArray());
-
         }
-
-
 
         private void tiTempo_Tick(object sender, EventArgs e)
         {
@@ -219,7 +199,7 @@ namespace zTempo
             var time = tbTime.Text;
             var duration = TimeOnly.Parse(tbDuration.Text);
             var project = (Project)cbProjects.SelectedItem;
-            if (project == null) { ZMessage.Information(this, "Seleccione una projecto"); return; };
+            if (project == null) { ZMessage.Information(this, "Seleccione una proyecto"); return; };
 
             var issue = (Issue)lbIssues.SelectedItem?.Tag;
             if (issue == null) { ZMessage.Information(this, "Seleccione una tarea"); return; }
@@ -256,40 +236,10 @@ namespace zTempo
 
         }
 
-        private void gestionarProyectosToolStripMenuItem_Click_1(object sender, EventArgs e)
+        private async void FrmTempo_Activated(object sender, EventArgs e)
         {
-            if (frmProjects.ShowDialog(this) == DialogResult.OK)
-            {
-                cbProjects.Items.Clear();
-                cbProjects.SelectedItem = null;
-                cbProjects.Items.AddRange(frmProjects.Projects.ToArray());
-                projectService.Save(frmProjects.Projects);
-            }
-        }
-
-        private void gestionarTareasToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            frmIssues.InitializeData((Project)cbProjects.SelectedItem);
-            if (frmIssues.ShowDialog(this) == DialogResult.OK)
-            {
-                lbIssues.Items.Clear();
-                lbIssues.SelectedItem = null;
-                frmIssues.Issues.ForEach(x => lbIssues.Items.Add(new MaterialListBoxItem { Text = x.Fields.Summary, SecondaryText = x.Key, Tag = x }));
-                //lbIssues.Items.Add(frmIssues.Issues.ToArray());
-                issueService.Save(frmIssues.Issues);
-                InitializeData();
-                cbProjects.SelectedIndex = cbProjects.FindStringExact(frmIssues.Project?.ToString());
-            }
-        }
-
-        private void pbMenu_Click(object sender, EventArgs e)
-        {
-            cmOptions.Show(pbMenu, new Point(pbMenu.Width, pbMenu.Height), ToolStripDropDownDirection.Left);
-
-        }
-
-        private void FrmTempo_Activated(object sender, EventArgs e)
-        {
+            DrawerShowIconsWhenHidden = true;
+            await Task.Delay(1000);
             TopMost = true;
         }
 
@@ -316,5 +266,219 @@ namespace zTempo
                 }
             }
         }
+
+        private void materialTabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            if (e.TabPageIndex == 0)
+            {
+                InitializeData();
+            }
+            else if (e.TabPageIndex == 1)
+            {
+                ProjectsInitializeData();
+            }
+            else if (e.TabPageIndex == 2)
+            {
+                IssuesInitializeData();
+            }
+        }
+
+        #endregion
+
+        #region Projects
+
+
+        private void ProjectsInitializeData()
+        {
+            var projects = projectService.GetProjects();
+            if (projects == null) return;
+            lbProjects.Items.Clear();
+            projects.ForEach(x => lbProjects.Items.Add(new MaterialListBoxItem
+            {
+                Text = x.Name,
+                SecondaryText = x.Key,
+                Tag = x
+            }));
+        }
+        private void btProjectAdd_Click(object sender, EventArgs e)
+        {
+            var selected = (Project)lbProjectsResult.SelectedItem?.Tag;
+            if (selected != null)
+            {
+                if (lbProjects.Items.Where(x => ((Project)x.Tag).Id.Equals(selected.Id)).FirstOrDefault() == null)
+                {
+                    lbProjects.Items.Add(new MaterialListBoxItem
+                    {
+                        Text = selected.Name,
+                        SecondaryText = selected.Key,
+                        Tag = selected
+                    });
+                    UpdateProjecs();
+                }
+                lbProjectsResult.SelectedItem = null;
+            }
+        }
+
+        private void UpdateProjecs()
+        {
+            var projects = lbProjects.Items.Select(x =>
+            {
+                var p = (Project)x.Tag;
+                return new Project
+                {
+                    Id = p.Id,
+                    Key = p.Key,
+                    Name = p.Name
+                };
+            }).ToList();
+            projectService.Save(projects);
+        }
+
+        private void btProjectDelete_Click(object sender, EventArgs e)
+        {
+            if (lbProjects.SelectedItem != null)
+            {
+                var project = lbProjects.SelectedItem;
+                lbProjects.Items.Remove(project);
+                UpdateProjecs();
+                lbProjects.SelectedItem = null;
+            }
+        }
+        private async void tbProjectFillter_TrailingIconClick(object sender, EventArgs e)
+        {
+            using (var zLoading = new ZLoading(this))
+            {
+                var projects = await projectService.GetProjectsByName(tbProjectFillter.Text);
+                lbProjectsResult.Items.Clear();
+                foreach (var item in projects)
+                {
+                    lbProjectsResult.Items.Add(new MaterialListBoxItem
+                    {
+                        Text = item.Name,
+                        SecondaryText = item.Key,
+                        Tag = item
+                    });
+                }
+            }
+        }
+        private void tbProjectFillter_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                tbProjectFillter_TrailingIconClick(sender, new EventArgs());
+            }
+        }
+
+
+        #endregion
+
+        #region Issues
+
+        public void IssuesInitializeData()
+        {
+            cbIssuesProjects.Items.Clear();
+            cbIssuesProjects.SelectedItem = null;
+            var projects = projectService.GetProjects();
+            if (projects == null) return;
+            cbIssuesProjects.Items.AddRange(projects.ToArray());
+        }
+
+        private void cbIssuesProjects_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var project = cbIssuesProjects.SelectedItem as Project;
+            lbIssuesResult.Items.Clear();
+            lbIssuesResult.SelectedItem = null;
+            lbIssuesIssues.Items.Clear();
+            lbIssuesIssues.SelectedItem = null;
+            if (project == null) return;
+            var issues = issueService.GetIssues(project.Id);
+            issues.ForEach(x => lbIssuesIssues.Items.Add(new MaterialListBoxItem
+            {
+                Text = x.Fields.Summary,
+                SecondaryText = x.Key,
+                Tag = x
+            }));
+        }
+        private void tbIssuesFilter_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                tbIssuesFilter_TrailingIconClick(sender, new EventArgs());
+            }
+        }
+
+        private async void tbIssuesFilter_TrailingIconClick(object sender, EventArgs e)
+        {
+            var project = (Project)cbIssuesProjects.SelectedItem;
+            if (project == null) { ZMessage.Information(this, "Seleccione primero el proyecto"); return; }
+            //if (string.IsNullOrEmpty(tbIssuesFilter.Text)) { ZMessage.Information(this, "Debe ingresar un filtro"); return; }
+
+            using (var zLoading = new ZLoading(this))
+            {
+                var issues = await issueService.GetIssuesByName(project.Key, tbIssuesFilter.Text);
+                lbIssuesResult.Items.Clear();
+                lbIssuesResult.SelectedItem = null;
+                foreach (var item in issues)
+                {
+                    item.ProjectId = project.Id;
+                    lbIssuesResult.Items.Add(new MaterialListBoxItem
+                    {
+                        Text = item.Fields.Summary,
+                        SecondaryText = item.Key,
+                        Tag = item
+                    });
+                }
+            }
+        }
+        private void btIssuesAdd_Click(object sender, EventArgs e)
+        {
+            var selected = (Issue)lbIssuesResult.SelectedItem?.Tag;
+            if (selected != null)
+            {
+                if (lbIssuesIssues.Items.Where(x => ((Issue)x.Tag).Id.Equals(selected.Id)).FirstOrDefault() == null)
+                {
+                    lbIssuesIssues.Items.Add(new MaterialListBoxItem
+                    {
+                        Text = selected.Fields.Summary,
+                        SecondaryText = selected.Key,
+                        Tag = selected
+                    });
+                    UpdateIssues();
+                }
+                lbIssuesIssues.SelectedItem = null;
+            }
+        }
+
+        private void UpdateIssues()
+        {
+            var issues = lbIssuesIssues.Items.Select(x =>
+            {
+                var p = (Issue)x.Tag;
+                return new Issue
+                {
+                    Id = p.Id,
+                    Key = p.Key,
+                    ProjectId = p.ProjectId,
+                    Fields = new Field
+                    {
+                        Summary = p.Fields.Summary
+                    }
+                };
+            }).ToList();
+            issueService.Save(issues);
+        }
+        private void btIssuesDelete_Click(object sender, EventArgs e)
+        {
+            if (lbIssuesIssues.SelectedItem != null)
+            {
+                var issue = lbIssuesIssues.SelectedItem;
+                lbIssuesIssues.Items.Remove(issue);
+                issueService.Remove((Issue)issue.Tag);
+                lbIssuesIssues.SelectedItem = null;
+            }
+        }
+
+        #endregion
+
     }
 }
