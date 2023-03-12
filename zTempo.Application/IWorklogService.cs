@@ -9,6 +9,7 @@ namespace zTempo.Application
 {
     public interface IWorklogService
     {
+        Task<List<Worklogs>> GetListByDateAsync(string accountId, string date);
         Task SaveAsync(Worklog worklog);
     }
 }

@@ -11,6 +11,7 @@ namespace zTempo.CrossCutting.Agents.TempoProxy
     {
         public string UrlBase { get; set; }
         void Authenticate(string token);
+        Task<List<TempoWorklogs>> GetListByDateAsync(string accountId, string date);
         Task SaveAsync(TempoWorklog tempoWorklog);
     }
 }

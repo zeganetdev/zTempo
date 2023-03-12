@@ -29,6 +29,11 @@ namespace zTempo.Application
             var token = configurations.FirstOrDefault(x => x.Field.Equals(Constants.TEMPO_TOKEN))?.Value;
             this.proxyTempo.Authenticate(token);
         }
+        public async Task<List<Worklogs>> GetListByDateAsync(string accountId, string date)
+        {
+            var result = await proxyTempo.GetListByDateAsync(accountId, date);
+            return mapper.Map<List<Worklogs>>(result);;
+        }
 
         public async Task SaveAsync(Worklog worklog)
         {

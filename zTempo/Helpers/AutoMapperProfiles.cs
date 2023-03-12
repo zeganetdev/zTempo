@@ -22,6 +22,8 @@ namespace zTempo.Helpers
             CreateMap<User, JiraUser>().ReverseMap();
 
             CreateMap<Worklog, TempoWorklog>().ReverseMap();
+            CreateMap<Worklogs, TempoWorklogs>().ReverseMap();
+            CreateMap<Issue, TempoIssue>().ReverseMap();
             CreateMap<WorklogAttribute, TempoAttribute>().ReverseMap();
         }
     }

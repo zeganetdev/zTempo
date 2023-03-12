@@ -37,6 +37,13 @@ namespace zTempo.Application
             return mapper.Map<List<Issue>>(result);
         }
 
+        public List<Issue> GetIssues()
+        {
+            var issuesAll = issueRepository.GetList();
+            if (issuesAll == null) return new List<Issue>();
+            return issuesAll.ToList();
+        }
+
         public List<Issue> GetIssues(string projectId)
         {
             var issuesAll = issueRepository.GetList();

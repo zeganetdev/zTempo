@@ -12,6 +12,8 @@ using zTempo.Models;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrayNotify;
 using ZMessage = zTempo.Helpers.ZMessage;
 using App = System.Windows.Forms.Application;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Drawing.Drawing2D;
 
 namespace zTempo
 {
@@ -31,11 +33,11 @@ namespace zTempo
         private const int WM_USER = 0x0400;
         private const int WM_MYMESSAGE = WM_USER + 33;
 
-        public FrmTempo(FrmConfiguration frmConfiguration, 
+        public FrmTempo(FrmConfiguration frmConfiguration,
                         FrmPopup frmPopup,
-                        IProjectService projectService, 
-                        IIssueService issueService, 
-                        IWorklogService worklogService, 
+                        IProjectService projectService,
+                        IIssueService issueService,
+                        IWorklogService worklogService,
                         IUserService userService)
         {
             InitializeComponent();
@@ -47,7 +49,7 @@ namespace zTempo
             this.issueService = issueService;
             this.worklogService = worklogService;
             this.userService = userService;
-            
+
             InitializeData();
 
         }
@@ -55,6 +57,8 @@ namespace zTempo
         private void ApplyTheme()
         {
             ZThemes.ThemeMultiplicaGreen(this);
+            dataGridView1.DefaultCellStyle.SelectionBackColor = ZThemes.COLOR_DARK_PRIMARY;
+            dataGridView1.DefaultCellStyle.SelectionForeColor = Color.White;
         }
 
         #region Tempo
@@ -64,8 +68,9 @@ namespace zTempo
             cbProjects.Items.Clear();
             cbProjects.SelectedItem = null;
             var projects = projectService.GetProjects();
-            if (projects == null) {
-                return; 
+            if (projects == null)
+            {
+                return;
             }
             cbProjects.Items.AddRange(projectService.GetProjects().ToArray());
             lbIssues.Items.Clear();
@@ -105,7 +110,7 @@ namespace zTempo
             lbIssues.Items.Clear();
             lbIssues.SelectedItem = null;
             if (project != null)
-                issueService.GetIssues(project.Id).ForEach(x => lbIssues.Items.Add(new MaterialListBoxItem { Text = x.Fields.Summary, SecondaryText = x.Key, Tag = x })); 
+                issueService.GetIssues(project.Id).ForEach(x => lbIssues.Items.Add(new MaterialListBoxItem { Text = x.Fields.Summary, SecondaryText = x.Key, Tag = x }));
         }
 
         private void tiTempo_Tick(object sender, EventArgs e)
@@ -194,7 +199,7 @@ namespace zTempo
         private async void btRegister_Click(object sender, EventArgs e)
         {
 
-      
+
             var date = DateTime.ParseExact(dpDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
             var time = tbTime.Text;
             var duration = TimeOnly.Parse(tbDuration.Text);
@@ -280,6 +285,10 @@ namespace zTempo
             else if (e.TabPageIndex == 2)
             {
                 IssuesInitializeData();
+            }
+            else if (e.TabPageIndex == 3)
+            {
+                HistoryInitializeData();
             }
         }
 
@@ -479,6 +488,80 @@ namespace zTempo
         }
 
         #endregion
+
+        #region Histoy
+        private void HistoryInitializeData()
+        {
+            //mcHistoryCalendar.TodayDate = DateTime.Now.AddDays(-1);
+            mcHistoryCalendar.TodayDate = DateTime.Now;
+            mcHistoryCalendar.SelectionStart = DateTime.Now; // new SelectionRange(DateTime.Now, DateTime.Now);
+        }
+
+        private void tbHistoryDate_TrailingIconClick(object sender, EventArgs e)
+        {
+            mcHistoryCalendar.BringToFront();
+            mcHistoryCalendar.Visible = !mcHistoryCalendar.Visible;
+        }
+        private async void mcHistoryCalendar_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            tbHistoryDate.Text = e.Start.ToString("dd/MM/yyyy");
+            mcHistoryCalendar.Visible = false;
+            dataGridView1.Rows.Clear();
+
+            var projects = projectService.GetProjects();
+            var issues = issueService.GetIssues();
+
+            using (var db = new ZLoading(this))
+            {
+                var history = await worklogService.GetListByDateAsync(userService.GetUser().AccountId, e.Start.ToString("yyyy-MM-dd"));
+                history.ForEach(x =>
+                {
+                    var issue = issues.FirstOrDefault(y => y.Id == x.Issue.Id);
+                    var project = projects.FirstOrDefault(y => y.Id == issue?.ProjectId);
+                    AddItemHistoryTime($"{project?.Name ?? "-"}", $"[{issue?.Key ?? "-"}] {issue?.Fields?.Summary ?? ""}\n{x.Description}", TimeSpan.FromSeconds(x.TimeSpentSeconds).ToString("hh\\:mm"));
+                });
+                var totalTime = history?.Sum(x => x.TimeSpentSeconds) ?? 0;
+                lbHistoryTotalHours.Text = $"Total horas del día: {TimeSpan.FromSeconds(totalTime).ToString("hh\\:mm")}";
+            }
+
+        }
+
+
+        private void AddItemHistoryTime(string project, string issue, string time)
+        {
+            object[] rowValues = { project, issue, time };
+            dataGridView1.Rows.Add(rowValues);
+        }
+
+        #endregion
+
+        private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            //        this.dataGridView1.DefaultCellStyle.WrapMode =
+            //DataGridViewTriState.True;
+            //        if (e.RowIndex >= 0 && (e.ColumnIndex >= 0 && e.ColumnIndex <= 1))
+            //        {
+            //            e.PaintBackground(e.CellBounds, true);
+            //            string text = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+            //            string[] lines = text.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
+
+            //            Graphics g = e.Graphics;
+            //            Brush brush = new SolidBrush(Color.Black);
+            //            Font font = dataGridView1.DefaultCellStyle.Font;
+
+            //            SizeF size = g.MeasureString(lines[0], font);
+            //            float x = e.CellBounds.Left + 5; // + (e.CellBounds.Width - size.Width) / 2;
+            //            float y = e.CellBounds.Top + (e.CellBounds.Height - size.Height * 2) / 2;
+            //            g.DrawString(lines[0], font, brush, x, y);
+            //            y += size.Height;
+            //            size = g.MeasureString(lines[1], font);
+            //            x = e.CellBounds.Left + 5; //+ (e.CellBounds.Width - size.Width) / 2;
+
+            //            g.DrawString(lines[1], font, brush, x, y);
+            //            brush.Dispose();
+            //            e.Handled = false;
+            //        }
+        }
 
     }
 }

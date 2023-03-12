@@ -26,10 +26,18 @@ namespace zTempo.CrossCutting.Agents.TempoProxy
             _restService.Client.SetBearerToken(token);
         }
 
+        public async Task<List<TempoWorklogs>> GetListByDateAsync(string accountId, string date)
+        {
+            string url = $"{UrlBase}/4/worklogs/user/{accountId}";
+            var query = new Dictionary<string, string> { { "from", date }, { "to", date } };
+            var result = await _restService.GetAsync<TempoResponseBase<List<TempoWorklogs>>>(url, query);
+            return result.Results;
+        }
         public async Task SaveAsync(TempoWorklog tempoWorklog)
         {
             string url = $"{UrlBase}/4/worklogs";
             await _restService.PostAsync(url, tempoWorklog);
         }
+
     }
 }

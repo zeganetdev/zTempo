@@ -10,13 +10,14 @@ namespace zTempo.Helpers
 {
     internal static class ZThemes
     {
+        public static readonly Color COLOR_DARK_PRIMARY = ColorTranslator.FromHtml("#28626C");
         public static MaterialSkinManager ThemeMultiplicaGreen(MaterialForm materialForm)
         {
             var instance = MaterialSkinManager.Instance;
             instance.EnforceBackcolorOnAllComponents = true;
             instance.AddFormToManage(materialForm);
             instance.Theme = MaterialSkinManager.Themes.LIGHT;
-            instance.ColorScheme = new ColorScheme(ColorTranslator.FromHtml("#0B4D58"), ColorTranslator.FromHtml("#28626C"), ColorTranslator.FromHtml("#699198"), ColorTranslator.FromHtml("#1BDEA6"), TextShade.WHITE);
+            instance.ColorScheme = new ColorScheme(ColorTranslator.FromHtml("#0B4D58"), COLOR_DARK_PRIMARY, ColorTranslator.FromHtml("#699198"), ColorTranslator.FromHtml("#1BDEA6"), TextShade.WHITE);
             return instance;
         }
         public static MaterialSkinManager ThemeDarkGreen(MaterialForm materialForm)

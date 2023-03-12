@@ -39,6 +39,12 @@ namespace zTempo
             MaterialSkin.MaterialListBoxItem materialListBoxItem5 = new MaterialSkin.MaterialListBoxItem();
             MaterialSkin.MaterialListBoxItem materialListBoxItem6 = new MaterialSkin.MaterialListBoxItem();
             MaterialSkin.MaterialListBoxItem materialListBoxItem7 = new MaterialSkin.MaterialListBoxItem();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tiTempo = new System.Windows.Forms.Timer(this.components);
             this.niTempo = new System.Windows.Forms.NotifyIcon(this.components);
             this.cmTempo = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -77,7 +83,16 @@ namespace zTempo
             this.lbIssuesResult = new MaterialSkin.Controls.MaterialListBox();
             this.tbIssuesFilter = new MaterialSkin.Controls.MaterialTextBox2();
             this.cbIssuesProjects = new MaterialSkin.Controls.MaterialComboBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.materialCard4 = new MaterialSkin.Controls.MaterialCard();
+            this.lbHistoryTotalHours = new MaterialSkin.Controls.MaterialLabel();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.tbHistoryDate = new MaterialSkin.Controls.MaterialTextBox2();
+            this.mcHistoryCalendar = new System.Windows.Forms.MonthCalendar();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.gvColProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gvColIssue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gvColTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmTempo.SuspendLayout();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -86,6 +101,9 @@ namespace zTempo
             this.materialCard2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.materialCard3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            this.materialCard4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // tiTempo
@@ -166,6 +184,7 @@ namespace zTempo
             this.materialTabControl1.Controls.Add(this.tabPage1);
             this.materialTabControl1.Controls.Add(this.tabPage2);
             this.materialTabControl1.Controls.Add(this.tabPage3);
+            this.materialTabControl1.Controls.Add(this.tabPage4);
             this.materialTabControl1.Depth = 0;
             this.materialTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.materialTabControl1.ImageList = this.imageList1;
@@ -835,6 +854,142 @@ namespace zTempo
             this.cbIssuesProjects.UseAccent = false;
             this.cbIssuesProjects.SelectedIndexChanged += new System.EventHandler(this.cbIssuesProjects_SelectedIndexChanged);
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.materialCard4);
+            this.tabPage4.ImageKey = "icon_history.png";
+            this.tabPage4.Location = new System.Drawing.Point(4, 24);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(649, 570);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Historial";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // materialCard4
+            // 
+            this.materialCard4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.materialCard4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard4.Controls.Add(this.lbHistoryTotalHours);
+            this.materialCard4.Controls.Add(this.dataGridView1);
+            this.materialCard4.Controls.Add(this.tbHistoryDate);
+            this.materialCard4.Controls.Add(this.mcHistoryCalendar);
+            this.materialCard4.Depth = 0;
+            this.materialCard4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialCard4.Location = new System.Drawing.Point(10, 14);
+            this.materialCard4.Margin = new System.Windows.Forms.Padding(14);
+            this.materialCard4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCard4.Name = "materialCard4";
+            this.materialCard4.Padding = new System.Windows.Forms.Padding(14);
+            this.materialCard4.Size = new System.Drawing.Size(634, 546);
+            this.materialCard4.TabIndex = 0;
+            // 
+            // lbHistoryTotalHours
+            // 
+            this.lbHistoryTotalHours.AutoSize = true;
+            this.lbHistoryTotalHours.Depth = 0;
+            this.lbHistoryTotalHours.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lbHistoryTotalHours.Location = new System.Drawing.Point(330, 31);
+            this.lbHistoryTotalHours.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lbHistoryTotalHours.Name = "lbHistoryTotalHours";
+            this.lbHistoryTotalHours.Size = new System.Drawing.Size(181, 19);
+            this.lbHistoryTotalHours.TabIndex = 5;
+            this.lbHistoryTotalHours.Text = "Total horas del día: 00:00";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToOrderColumns = true;
+            this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView1.ColumnHeadersHeight = 33;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.gvColProject,
+            this.gvColIssue,
+            this.gvColTime});
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle5;
+            this.dataGridView1.Location = new System.Drawing.Point(17, 75);
+            this.dataGridView1.MultiSelect = false;
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowTemplate.Height = 50;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.ShowCellErrors = false;
+            this.dataGridView1.ShowEditingIcon = false;
+            this.dataGridView1.ShowRowErrors = false;
+            this.dataGridView1.Size = new System.Drawing.Size(600, 454);
+            this.dataGridView1.TabIndex = 4;
+            this.dataGridView1.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView1_CellPainting);
+            // 
+            // tbHistoryDate
+            // 
+            this.tbHistoryDate.AnimateReadOnly = true;
+            this.tbHistoryDate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tbHistoryDate.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.tbHistoryDate.Depth = 0;
+            this.tbHistoryDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.tbHistoryDate.HideSelection = true;
+            this.tbHistoryDate.Hint = "Fecha";
+            this.tbHistoryDate.LeadingIcon = null;
+            this.tbHistoryDate.Location = new System.Drawing.Point(17, 17);
+            this.tbHistoryDate.MaxLength = 32767;
+            this.tbHistoryDate.MouseState = MaterialSkin.MouseState.OUT;
+            this.tbHistoryDate.Name = "tbHistoryDate";
+            this.tbHistoryDate.PasswordChar = '\0';
+            this.tbHistoryDate.PrefixSuffixText = null;
+            this.tbHistoryDate.ReadOnly = true;
+            this.tbHistoryDate.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tbHistoryDate.SelectedText = "";
+            this.tbHistoryDate.SelectionLength = 0;
+            this.tbHistoryDate.SelectionStart = 0;
+            this.tbHistoryDate.ShortcutsEnabled = true;
+            this.tbHistoryDate.Size = new System.Drawing.Size(248, 48);
+            this.tbHistoryDate.TabIndex = 2;
+            this.tbHistoryDate.TabStop = false;
+            this.tbHistoryDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.tbHistoryDate.TrailingIcon = global::zTempo.Properties.Resources.icon_calendar;
+            this.tbHistoryDate.UseAccent = false;
+            this.tbHistoryDate.UseSystemPasswordChar = false;
+            this.tbHistoryDate.TrailingIconClick += new System.EventHandler(this.tbHistoryDate_TrailingIconClick);
+            // 
+            // mcHistoryCalendar
+            // 
+            this.mcHistoryCalendar.Location = new System.Drawing.Point(17, 63);
+            this.mcHistoryCalendar.Name = "mcHistoryCalendar";
+            this.mcHistoryCalendar.TabIndex = 1;
+            this.mcHistoryCalendar.Visible = false;
+            this.mcHistoryCalendar.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.mcHistoryCalendar_DateChanged);
+            // 
             // imageList1
             // 
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
@@ -843,6 +998,40 @@ namespace zTempo
             this.imageList1.Images.SetKeyName(0, "ico_project.png");
             this.imageList1.Images.SetKeyName(1, "ico_time.png");
             this.imageList1.Images.SetKeyName(2, "ico_issue.png");
+            this.imageList1.Images.SetKeyName(3, "icon_history.png");
+            // 
+            // gvColProject
+            // 
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.gvColProject.DefaultCellStyle = dataGridViewCellStyle2;
+            this.gvColProject.HeaderText = "Proyecto";
+            this.gvColProject.MinimumWidth = 100;
+            this.gvColProject.Name = "gvColProject";
+            this.gvColProject.ReadOnly = true;
+            this.gvColProject.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.gvColProject.Width = 200;
+            // 
+            // gvColIssue
+            // 
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.gvColIssue.DefaultCellStyle = dataGridViewCellStyle3;
+            this.gvColIssue.HeaderText = "Tarea";
+            this.gvColIssue.MinimumWidth = 100;
+            this.gvColIssue.Name = "gvColIssue";
+            this.gvColIssue.ReadOnly = true;
+            this.gvColIssue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.gvColIssue.Width = 255;
+            // 
+            // gvColTime
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.gvColTime.DefaultCellStyle = dataGridViewCellStyle4;
+            this.gvColTime.HeaderText = "Tiempo";
+            this.gvColTime.Name = "gvColTime";
+            this.gvColTime.ReadOnly = true;
+            this.gvColTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.gvColTime.Width = 90;
             // 
             // FrmTempo
             // 
@@ -876,6 +1065,10 @@ namespace zTempo
             this.tabPage3.ResumeLayout(false);
             this.materialCard3.ResumeLayout(false);
             this.materialCard3.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.materialCard4.ResumeLayout(false);
+            this.materialCard4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -920,5 +1113,14 @@ namespace zTempo
         private MaterialListBox lbIssuesResult;
         private MaterialTextBox2 tbIssuesFilter;
         private ImageList imageList1;
+        private TabPage tabPage4;
+        private MaterialCard materialCard4;
+        private MaterialTextBox2 tbHistoryDate;
+        private MonthCalendar mcHistoryCalendar;
+        private DataGridView dataGridView1;
+        private MaterialLabel lbHistoryTotalHours;
+        private DataGridViewTextBoxColumn gvColProject;
+        private DataGridViewTextBoxColumn gvColIssue;
+        private DataGridViewTextBoxColumn gvColTime;
     }
 }

@@ -2,6 +2,7 @@
 {
     public class Issue
     {
+        public string Self { get; set; }
         public string Id { get; set; }
         public string ProjectId { get; set; }
         public string Key { get; set; }
