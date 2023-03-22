@@ -39,5 +39,10 @@ namespace zTempo.CrossCutting.Agents.TempoProxy
             await _restService.PostAsync(url, tempoWorklog);
         }
 
+        public async Task DeleteAsync(int tempoWorklogId)
+        {
+            string url = $"{UrlBase}/4/worklogs/{tempoWorklogId}";
+            await _restService.DeleteAsync(url);
+        }
     }
 }

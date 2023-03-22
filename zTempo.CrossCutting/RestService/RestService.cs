@@ -30,5 +30,11 @@ namespace zTempo.CrossCutting.RestService
             var httpResponse = await Client.PostAsJsonAsync(url, body);
             httpResponse.EnsureSuccessStatusCode();
         }
+
+        public async Task DeleteAsync(string url)
+        {
+            var httpResponse = await Client.DeleteAsync(url);
+            httpResponse.EnsureSuccessStatusCode();
+        }
     }
 }

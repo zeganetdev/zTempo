@@ -40,5 +40,10 @@ namespace zTempo.Application
             var entity = mapper.Map<TempoWorklog>(worklog);
             await proxyTempo.SaveAsync(entity);
         }
+
+        public async Task DeleteAsync(int tempoWorklogId)
+        {
+            await proxyTempo.DeleteAsync(tempoWorklogId);
+        }
     }
 }

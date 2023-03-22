@@ -32,13 +32,6 @@ namespace zTempo
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmTempo));
-            MaterialSkin.MaterialListBoxItem materialListBoxItem1 = new MaterialSkin.MaterialListBoxItem();
-            MaterialSkin.MaterialListBoxItem materialListBoxItem2 = new MaterialSkin.MaterialListBoxItem();
-            MaterialSkin.MaterialListBoxItem materialListBoxItem3 = new MaterialSkin.MaterialListBoxItem();
-            MaterialSkin.MaterialListBoxItem materialListBoxItem4 = new MaterialSkin.MaterialListBoxItem();
-            MaterialSkin.MaterialListBoxItem materialListBoxItem5 = new MaterialSkin.MaterialListBoxItem();
-            MaterialSkin.MaterialListBoxItem materialListBoxItem6 = new MaterialSkin.MaterialListBoxItem();
-            MaterialSkin.MaterialListBoxItem materialListBoxItem7 = new MaterialSkin.MaterialListBoxItem();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -90,6 +83,7 @@ namespace zTempo
             this.tbHistoryDate = new MaterialSkin.Controls.MaterialTextBox2();
             this.mcHistoryCalendar = new System.Windows.Forms.MonthCalendar();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.colOpt = new System.Windows.Forms.DataGridViewImageColumn();
             this.gvColProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gvColIssue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gvColTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -400,34 +394,6 @@ namespace zTempo
             this.lbIssues.BorderColor = System.Drawing.Color.LightGray;
             this.lbIssues.Depth = 0;
             this.lbIssues.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            materialListBoxItem1.SecondaryText = "dfgd";
-            materialListBoxItem1.Tag = null;
-            materialListBoxItem1.Text = "ListBoxItem";
-            materialListBoxItem2.SecondaryText = "dfg";
-            materialListBoxItem2.Tag = null;
-            materialListBoxItem2.Text = "ListBoxItem";
-            materialListBoxItem3.SecondaryText = "fdgdfgfdg";
-            materialListBoxItem3.Tag = null;
-            materialListBoxItem3.Text = "ListBoxItem";
-            materialListBoxItem4.SecondaryText = "dfgdfg";
-            materialListBoxItem4.Tag = null;
-            materialListBoxItem4.Text = "ListBoxItem";
-            materialListBoxItem5.SecondaryText = "dfgdfg";
-            materialListBoxItem5.Tag = null;
-            materialListBoxItem5.Text = "ListBoxItem";
-            materialListBoxItem6.SecondaryText = "dfgdfg";
-            materialListBoxItem6.Tag = null;
-            materialListBoxItem6.Text = "ListBoxItem";
-            materialListBoxItem7.SecondaryText = "sdf";
-            materialListBoxItem7.Tag = null;
-            materialListBoxItem7.Text = "ListBoxItem2";
-            this.lbIssues.Items.Add(materialListBoxItem1);
-            this.lbIssues.Items.Add(materialListBoxItem2);
-            this.lbIssues.Items.Add(materialListBoxItem3);
-            this.lbIssues.Items.Add(materialListBoxItem4);
-            this.lbIssues.Items.Add(materialListBoxItem5);
-            this.lbIssues.Items.Add(materialListBoxItem6);
-            this.lbIssues.Items.Add(materialListBoxItem7);
             this.lbIssues.Location = new System.Drawing.Point(18, 17);
             this.lbIssues.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.lbIssues.MouseState = MaterialSkin.MouseState.HOVER;
@@ -513,7 +479,7 @@ namespace zTempo
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.materialCard2);
-            this.tabPage2.ImageKey = "ico_project.png";
+            this.tabPage2.ImageKey = "ico_project_32.png";
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabPage2.Name = "tabPage2";
@@ -901,7 +867,6 @@ namespace zTempo
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -919,6 +884,7 @@ namespace zTempo
             this.dataGridView1.ColumnHeadersHeight = 33;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colOpt,
             this.gvColProject,
             this.gvColIssue,
             this.gvColTime});
@@ -943,12 +909,14 @@ namespace zTempo
             this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 50;
+            this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.ShowCellErrors = false;
             this.dataGridView1.ShowEditingIcon = false;
             this.dataGridView1.ShowRowErrors = false;
             this.dataGridView1.Size = new System.Drawing.Size(600, 454);
             this.dataGridView1.TabIndex = 4;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClickAsync);
             this.dataGridView1.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView1_CellPainting);
             // 
             // tbHistoryDate
@@ -999,17 +967,30 @@ namespace zTempo
             this.imageList1.Images.SetKeyName(1, "ico_time.png");
             this.imageList1.Images.SetKeyName(2, "ico_issue.png");
             this.imageList1.Images.SetKeyName(3, "icon_history.png");
+            this.imageList1.Images.SetKeyName(4, "ico_project_32.png");
+            this.imageList1.Images.SetKeyName(5, "trash.png");
+            // 
+            // colOpt
+            // 
+            this.colOpt.Description = "Eliminar";
+            this.colOpt.Frozen = true;
+            this.colOpt.HeaderText = "Opt";
+            this.colOpt.Name = "colOpt";
+            this.colOpt.ReadOnly = true;
+            this.colOpt.ToolTipText = "Eliminar";
+            this.colOpt.Width = 33;
             // 
             // gvColProject
             // 
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.gvColProject.DefaultCellStyle = dataGridViewCellStyle2;
+            this.gvColProject.Frozen = true;
             this.gvColProject.HeaderText = "Proyecto";
             this.gvColProject.MinimumWidth = 100;
             this.gvColProject.Name = "gvColProject";
             this.gvColProject.ReadOnly = true;
             this.gvColProject.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.gvColProject.Width = 200;
+            this.gvColProject.Width = 190;
             // 
             // gvColIssue
             // 
@@ -1020,7 +1001,7 @@ namespace zTempo
             this.gvColIssue.Name = "gvColIssue";
             this.gvColIssue.ReadOnly = true;
             this.gvColIssue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.gvColIssue.Width = 255;
+            this.gvColIssue.Width = 245;
             // 
             // gvColTime
             // 
@@ -1031,7 +1012,7 @@ namespace zTempo
             this.gvColTime.Name = "gvColTime";
             this.gvColTime.ReadOnly = true;
             this.gvColTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.gvColTime.Width = 90;
+            this.gvColTime.Width = 75;
             // 
             // FrmTempo
             // 
@@ -1119,6 +1100,7 @@ namespace zTempo
         private MonthCalendar mcHistoryCalendar;
         private DataGridView dataGridView1;
         private MaterialLabel lbHistoryTotalHours;
+        private DataGridViewImageColumn colOpt;
         private DataGridViewTextBoxColumn gvColProject;
         private DataGridViewTextBoxColumn gvColIssue;
         private DataGridViewTextBoxColumn gvColTime;

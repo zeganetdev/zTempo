@@ -11,5 +11,6 @@ namespace zTempo.Application
     {
         Task<List<Worklogs>> GetListByDateAsync(string accountId, string date);
         Task SaveAsync(Worklog worklog);
+        Task DeleteAsync(int tempoWorklogId);
     }
 }

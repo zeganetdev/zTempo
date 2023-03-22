@@ -11,5 +11,6 @@ namespace zTempo.CrossCutting.RestService
         HttpClient Client { get; set; }
         Task<T> GetAsync<T>(string url, Dictionary<string, string> paramsQuery);
         Task PostAsync<T>(string url, T entity);
+        Task DeleteAsync(string url);
     }
 }

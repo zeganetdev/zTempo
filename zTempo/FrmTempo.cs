@@ -244,7 +244,7 @@ namespace zTempo
         private async void FrmTempo_Activated(object sender, EventArgs e)
         {
             DrawerShowIconsWhenHidden = true;
-            await Task.Delay(1000);
+            await Task.Delay(1);
             TopMost = true;
         }
 
@@ -270,6 +270,7 @@ namespace zTempo
                     App.Exit();
                 }
             }
+
         }
 
         private void materialTabControl1_Selected(object sender, TabControlEventArgs e)
@@ -518,7 +519,7 @@ namespace zTempo
                 {
                     var issue = issues.FirstOrDefault(y => y.Id == x.Issue.Id);
                     var project = projects.FirstOrDefault(y => y.Id == issue?.ProjectId);
-                    AddItemHistoryTime($"{project?.Name ?? "-"}", $"[{issue?.Key ?? "-"}] {issue?.Fields?.Summary ?? ""}\n{x.Description}", TimeSpan.FromSeconds(x.TimeSpentSeconds).ToString("hh\\:mm"));
+                    AddItemHistoryTime(x.TempoWorklogId, $"{project?.Name ?? "-"}", $"[{issue?.Key ?? "-"}] {issue?.Fields?.Summary ?? ""}\n{x.Description}", TimeSpan.FromSeconds(x.TimeSpentSeconds).ToString("hh\\:mm"));
                 });
                 var totalTime = history?.Sum(x => x.TimeSpentSeconds) ?? 0;
                 lbHistoryTotalHours.Text = $"Total horas del día: {TimeSpan.FromSeconds(totalTime).ToString("hh\\:mm")}";
@@ -527,10 +528,50 @@ namespace zTempo
         }
 
 
-        private void AddItemHistoryTime(string project, string issue, string time)
+        private void AddItemHistoryTime(int tempoWorklogId, string project, string issue, string time)
         {
-            object[] rowValues = { project, issue, time };
+            var imgTrash = imageList1.Images["trash.png"];
+
+            DataGridViewRow dataGridViewRow = new DataGridViewRow();
+
+            var cell1 = new DataGridViewImageCell();
+
+            cell1.ToolTipText = "Eliminar";
+            cell1.Value = imgTrash;
+
+            var cell2 = new DataGridViewTextBoxCell();
+            cell2.Value = project;
+
+            var cell3 = new DataGridViewTextBoxCell();
+            cell3.Value = issue;
+
+            var cell4 = new DataGridViewTextBoxCell();
+            cell4.Value = time;
+
+            //dataGridViewRow.Cells.AddRange(cell1, cell2, cell3, cell4);
+            //dataGridView1.Rows.Add(dataGridViewRow);
+
+
+            object[] rowValues = { imgTrash, project, issue, time };
             dataGridView1.Rows.Add(rowValues);
+            var btnDelete = (DataGridViewImageCell) dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[0];
+            btnDelete.ToolTipText = "Eliminar";
+            btnDelete.Tag = tempoWorklogId;
+
+        }
+
+        private async void dataGridView1_CellContentClickAsync(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                var btnDelete = (DataGridViewImageCell)dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                var tempoWorklogId = (int)btnDelete.Tag;
+                using (var db = new ZLoading(this))
+                {
+                    await worklogService.DeleteAsync(tempoWorklogId);
+                }
+                mcHistoryCalendar_DateChanged(null, new DateRangeEventArgs(mcHistoryCalendar.SelectionStart, mcHistoryCalendar.SelectionStart));
+            }
         }
 
         #endregion
@@ -562,6 +603,7 @@ namespace zTempo
             //            e.Handled = false;
             //        }
         }
+
 
     }
 }
